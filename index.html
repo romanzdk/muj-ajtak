@@ -18,10 +18,8 @@
   <meta name="twitter:card" content="summary_large_image">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Můj ajťák","url":"https://romanzdk.github.io/muj-ajtak/","inLanguage":"cs","description":"Seznam ajťáků, kteří pomáhají lidem s počítačem, telefonem, internetem a tiskárnou. Celá Česká republika."}</script>
   <meta name="theme-color" content="#312e81">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self' https://cdnjs.cloudflare.com; font-src 'self'; img-src 'self' data: https://tile.openstreetmap.org https://cdnjs.cloudflare.com; connect-src 'self' https://nominatim.openstreetmap.org; object-src 'none'; base-uri 'none'; form-action 'self'">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%234f46e5'/%3E%3Cpath d='M9 11h14v9H9z M7 23h18' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -63,10 +61,15 @@
             <label class="chip"><input type="checkbox" name="service" value="telefon"><span>📱 Telefon a tablet</span></label>
             <label class="chip"><input type="checkbox" name="service" value="internet"><span>📶 Internet a Wi-Fi</span></label>
             <label class="chip"><input type="checkbox" name="service" value="tiskarna"><span>🖨️ Tiskárna</span></label>
-            <label class="chip"><input type="checkbox" name="service" value="ostatni"><span>✨ Ostatní</span></label>
+            <label class="chip"><input type="checkbox" name="service" value="ostatni"><span>✨ Něco jiného</span></label>
           </div>
         </fieldset>
       </section>
+      <ul class="trust">
+        <li>Zdarma, bez registrace</li>
+        <li>Každou přihlášku ručně kontrolujeme</li>
+        <li>Cenu domluvíte přímo s ajťákem</li>
+      </ul>
       <p id="status" aria-live="polite"></p>
     </div>
 
@@ -78,6 +81,10 @@
     <section class="list-area" aria-label="Seznam ajťáků">
       <h2>Ajťáci <span id="count" class="count"></span></h2>
       <ol id="results"></ol>
+      <aside class="safety" aria-label="Bezpečnost">
+        <strong>🛡️ Buďte opatrní</strong>
+        <p>Nikomu nedávejte hesla do banky, PIN ani kódy z SMS. Neinstalujte programy na vzdálené ovládání počítače, když vás o to požádá někdo, koho neznáte. Platit předem nemusíte.</p>
+      </aside>
     </section>
   </main>
 
@@ -92,6 +99,7 @@
         <button type="button" class="btn btn-ghost js-mail" data-subject="Chci se přidat do Můj ajťák">Nemám GitHub – napsat e-mail</button>
       </div>
     </section>
+    <p class="disclaimer">Ajťáci v seznamu nejsou naši zaměstnanci. Za jejich práci a ceny neodpovídáme, domlouváte se přímo s nimi. Když s někým budete mít problém, napište nám a záznam odstraníme.</p>
     <nav class="footer-links">
       <button type="button" class="linkish js-mail" data-subject="Odebrání ze seznamu Můj ajťák">Chci se ze seznamu odebrat</button>
       <a href="ochrana-udaju.html">Ochrana osobních údajů</a>

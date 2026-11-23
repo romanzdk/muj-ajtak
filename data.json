@@ -5,13 +5,13 @@
     "city": "Praha 4 - Michle",
     "lat": 50.056,
     "lon": 14.452,
-    "phone": "+420777000001",
     "services": [
       "pocitac",
       "telefon"
     ],
     "visits": true,
-    "note": "Ukázkový záznam, nejde o skutečného ajťáka."
+    "note": "Ukázkový záznam, nejde o skutečného ajťáka. Skuteční ajťáci tu budou brzy.",
+    "email": "ukazka@example.com"
   },
   {
     "id": "ukazka-2",
@@ -19,7 +19,6 @@
     "city": "Brno - Líšeň",
     "lat": 49.21,
     "lon": 16.687,
-    "phone": "+420777000002",
     "web": "https://example.com",
     "services": [
       "pocitac",
@@ -27,7 +26,8 @@
       "internet"
     ],
     "visits": false,
-    "note": "Ukázkový záznam, nejde o skutečného ajťáka."
+    "note": "Ukázkový záznam, nejde o skutečného ajťáka. Skuteční ajťáci tu budou brzy.",
+    "email": "ukazka@example.com"
   },
   {
     "id": "ukazka-3",
@@ -35,13 +35,13 @@
     "city": "Ostrava - Poruba",
     "lat": 49.83,
     "lon": 18.17,
-    "phone": "+420777000003",
     "services": [
       "telefon",
       "internet",
       "ostatni"
     ],
     "visits": true,
-    "note": "Ukázkový záznam, nejde o skutečného ajťáka."
+    "note": "Ukázkový záznam, nejde o skutečného ajťáka. Skuteční ajťáci tu budou brzy.",
+    "email": "ukazka@example.com"
   }
 ]

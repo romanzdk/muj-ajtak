@@ -86,7 +86,11 @@ function renderItem(h) {
   li.append(head);
 
   const tags = el('ul', 'tags');
-  if (h.icoVerified) tags.append(el('li', 'tag ok', '✔ Ověřené IČO'));
+  if (h.ico && h.icoName) {
+    const t = el('li', 'tag ok', `IČO ${h.ico} v registru ARES`);
+    t.title = `${h.icoName} – IČO existuje v obchodním registru. Neznamená to doporučení ani ověření kvality.`;
+    tags.append(t);
+  }
   if (h.visits) tags.append(el('li', 'tag ok', 'Přijede i k vám domů'));
   for (const s of h.services) if (SERVICES[s]) tags.append(el('li', 'tag', SERVICES[s]));
   li.append(tags);
@@ -121,7 +125,7 @@ function render() {
   const list = currentList();
   resultsEl.replaceChildren(...list.map(renderItem));
   $('#count').textContent = all.length ? String(list.length) : '';
-  if (!list.length && all.length) resultsEl.append(el('li', 'empty', 'Pro vybranou pomoc zatím nikoho nemáme. Zkuste zrušit výběr výše.'));
+  if (!list.length && all.length) resultsEl.append(el('li', 'empty', 'Pro vybranou pomoc zatím nikoho nemáme. Zkuste zrušit výběr nahoře. Služba je nová a ajťáci přibývají.'));
   for (const [id, m] of markers) {
     const visible = list.some((h) => h.id === id);
     if (visible && !map.hasLayer(m)) m.addTo(map);

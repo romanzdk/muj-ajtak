@@ -36,7 +36,9 @@ export function normalizePhone(s) {
 
 export function parseIssueBody(body) {
   const s = sections(body);
-  const get = (key, max = 200) => (s[FIELDS[key]] || '').slice(0, max) || undefined;
+  // Single-line fields: drop control/invisible chars (newlines, bidi overrides) so they can't fake extra lines.
+  const oneLine = (v) => v.replace(/[\p{Cc}\p{Cf}]/gu, ' ').replace(/\s+/g, ' ').trim();
+  const get = (key, max = 200) => oneLine(s[FIELDS[key]] || '').slice(0, max) || undefined;
   const labelToKey = Object.fromEntries(Object.entries(SERVICES).map(([k, v]) => [v, k]));
   const phone = get('phone');
   return {
@@ -47,9 +49,9 @@ export function parseIssueBody(body) {
     web: get('web'),
     services: checked(s[FIELDS.services] || '').map((l) => labelToKey[l]).filter(Boolean),
     visits: (s[FIELDS.visits] || '').trim() === 'Ano',
-    note: get('note', 300),
+    note: (s[FIELDS.note] || '').replace(/[\p{Cf}]/gu, '').trim().slice(0, 300) || undefined,
     ico: get('ico')?.replace(/\s/g, ''),
-    consent: checked(s[FIELDS.consent] || '').length > 0,
+    consent: checked(s[FIELDS.consent] || '').length > 0 && !/^- \[ \]/m.test(s[FIELDS.consent] || ''),
   };
 }
 
@@ -76,9 +78,24 @@ export function toHelper(issueNumber, p, geo, ico) {
   h.services = p.services;
   h.visits = p.visits;
   if (p.note) h.note = p.note;
-  if (ico.ok) h.icoVerified = true;
+  if (ico.ok && namesMatch(p.name, ico.name)) {
+    h.ico = p.ico;
+    h.icoName = ico.name;
+  }
   return h;
 }
+
+const LEGAL_FORMS = /\b(s\.?\s?r\.?\s?o|spol|a\.?\s?s|v\.?\s?o\.?\s?s|k\.?\s?s|z\.?\s?s|o\.?\s?p\.?\s?s|se)\b\.?/g;
+const simplify = (s) => (s || '').normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()
+  .replace(LEGAL_FORMS, ' ').replace(/[^a-z0-9]+/g, ' ').trim();
+
+export function namesMatch(applicant, aresName) {
+  const a = simplify(applicant);
+  const b = simplify(aresName);
+  return Boolean(a && b) && (a === b || a.includes(b) || b.includes(a));
+}
+
+const BLOCKED_NAME = /microsoft|apple|google|samsung|windows|banka|banky|spořitelna|sporitelna|policie|podpora|support|helpdesk|bezpečnost|bezpecnost|úřad|urad/i;
 
 export function validate(p) {
   const errors = [];
@@ -86,7 +103,10 @@ export function validate(p) {
   if (!p.name) errors.push('Chybí jméno.');
   if (!p.city) errors.push('Chybí město.');
   if (!p.phone && !p.email) errors.push('Vyplňte prosím telefon nebo e-mail, ať se vám lidé můžou ozvat.');
-  if (p.phone && !/^(\+420)?\d{9}$/.test(p.phone)) errors.push('Telefon: napište prosím jedno české číslo, např. 777 123 456.');
+  if (p.name && BLOCKED_NAME.test(p.name)) errors.push('Jméno: nepoužívejte prosím názvy firem, bank, úřadů ani slova jako „podpora“. Napište své jméno nebo název své firmy.');
+  // 90x numbers are premium-rate lines; only regular CZ landline/mobile prefixes 2–7 are allowed.
+  if (p.phone && !/^(\+420)?[2-7]\d{8}$/.test(p.phone)) errors.push('Telefon: napište prosím jedno české číslo, např. 777 123 456.');
+  if (p.email && !/^[^\s@?&]+@[^\s@?&]+\.[a-z]{2,}$/i.test(p.email)) errors.push('E-mail: napište prosím jen e-mailovou adresu, např. jan@seznam.cz.');
   if (p.web && !/^https?:\/\//i.test(p.web)) errors.push('Web musí začínat https:// nebo http://.');
   if (!p.services.length) errors.push('Vyberte prosím aspoň jednu oblast, se kterou pomáháte.');
   return errors;
@@ -109,8 +129,10 @@ export function buildPrBody(issueNumber, p, geo, ico, helper) {
   const json = JSON.stringify(helper, null, 2);
   const longestRun = Math.max(0, ...(json.match(/`+/g) || []).map((r) => r.length));
   const fence = '`'.repeat(Math.max(4, longestRun + 1));
-  const icoLine = ico.ok
-    ? `✔ ARES: ${inlineCode(ico.name)}`
+  const icoLine = helper.ico
+    ? `✔ ARES: ${inlineCode(ico.name)} (jméno sedí, dostane štítek)`
+    : ico.ok
+    ? `ARES: ${inlineCode(ico.name)}, ale jméno nesedí → bez štítku`
     : `bez odznaku (${ico.reason}${ico.name ? `, ${inlineCode(ico.name)}` : ''})`;
   return [
     `Nová přihláška z #${issueNumber}.`,
@@ -119,7 +141,7 @@ export function buildPrBody(issueNumber, p, geo, ico, helper) {
     `- Jméno: ${inlineCode(p.name)}`,
     `- Místo na mapě: ${inlineCode(geo.label)} (${geo.lat}, ${geo.lon})`,
     `- IČO: ${p.ico ? inlineCode(p.ico) : '—'} → ${icoLine}`,
-    ico.ok ? '- Sedí název z ARES k jménu v přihlášce?' : '',
+    '- Zavolej na uvedené číslo a ověř, že to je opravdu on/ona.',
     '- Těsně před merge zkontroluj ještě jednou diff (autor může issue mezitím upravit).',
     '',
     `${fence}json`,
@@ -146,7 +168,7 @@ async function main() {
   } catch {
     fail(['Mapová služba teď neodpovídá. Zkuste prosím přihlášku za chvíli znovu uložit (Edit → Update).']);
   }
-  if (!geo) errors.push(`Město „${p.city}“ se nepodařilo najít na mapě. Upravte ho prosím (např. „Brno - Líšeň“ nebo PSČ).`);
+  if (!geo) errors.push(`Město ${inlineCode(p.city.replace(/@/g, ''))} se nepodařilo najít na mapě. Upravte ho prosím (např. „Brno - Líšeň“ nebo PSČ).`);
   if (errors.length) fail(errors);
   const ico = p.ico ? await checkIco(p.ico) : { ok: false, reason: 'nevyplněno' };
   const helper = toHelper(issueNumber, p, geo, ico);

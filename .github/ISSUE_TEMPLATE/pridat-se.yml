@@ -9,7 +9,7 @@ body:
         Díky, že chcete pomáhat! Vyplňte prosím údaje, které se zobrazí na webu.
         Přesnou adresu nevyplňujte, stačí město nebo jeho část.
 
-        **Pozor:** tato přihláška je na GitHubu hned veřejně vidět (i před schválením).
+        **Pozor:** tato přihláška je na GitHubu hned veřejně vidět (i před schválením). Po odebrání ze seznamu přihlášku smažeme, ale kopie údajů můžou zůstat v historii projektu na GitHubu. Pokud to nechcete, napište nám raději e-mail (odkaz je na webu dole).
   - type: input
     attributes:
       label: Jméno nebo název firmy
@@ -56,10 +56,12 @@ body:
   - type: input
     attributes:
       label: IČO (nepovinné)
-      description: Pokud máte živnost nebo firmu. Ověříme ho v registru ARES a u záznamu se zobrazí „Ověřené IČO“.
+      description: Pokud máte živnost nebo firmu. Ověříme ho v registru ARES. Když název v ARES sedí k vašemu jménu, u záznamu se zobrazí „IČO v registru ARES“.
   - type: checkboxes
     attributes:
       label: Souhlas
       options:
-        - label: Souhlasím se zveřejněním těchto údajů na webu
+        - label: Souhlasím se zveřejněním těchto údajů na webu Můj ajťák
+          required: true
+        - label: Beru na vědomí, že tato přihláška je hned veřejně vidět na GitHubu
           required: true
