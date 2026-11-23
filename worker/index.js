@@ -15,6 +15,45 @@ const json = (data, status, origin) => new Response(status === 204 ? null : JSON
   },
 });
 
+const NOTIFY_FROM = 'prihlasky@najdiajtaka.cz';
+const NOTIFY_TO = 'romanzdk@gmail.com';
+
+const b64 = (text) => btoa(String.fromCharCode(...new TextEncoder().encode(text)));
+
+export function buildNotifyEmail(helper, issueUrl, now = new Date()) {
+  const subject = `Nová přihláška: ${helper.name}`;
+  const body = [
+    'Na najdiajtaka.cz přišla nová přihláška ajťáka.',
+    '',
+    `${helper.name}, ${helper.city}`,
+    '',
+    'Zkontroluj a schval (štítek schvaleno):',
+    issueUrl,
+  ].join('\r\n');
+  return [
+    `From: Najdi ajtaka <${NOTIFY_FROM}>`,
+    `To: ${NOTIFY_TO}`,
+    `Subject: =?UTF-8?B?${b64(subject)}?=`,
+    `Date: ${now.toUTCString()}`,
+    `Message-ID: <${now.getTime()}.${Math.random().toString(36).slice(2)}@najdiajtaka.cz>`,
+    'MIME-Version: 1.0',
+    'Content-Type: text/plain; charset=utf-8',
+    'Content-Transfer-Encoding: base64',
+    '',
+    b64(body).replace(/.{76}/g, '$&\r\n'),
+  ].join('\r\n');
+}
+
+async function notify(env, helper, issueUrl) {
+  if (!env.NOTIFY) return;
+  try {
+    const { EmailMessage } = await import('cloudflare:email');
+    await env.NOTIFY.send(new EmailMessage(NOTIFY_FROM, NOTIFY_TO, buildNotifyEmail(helper, issueUrl)));
+  } catch (err) {
+    console.error('Notify e-mail failed', err);
+  }
+}
+
 async function turnstileOk(token, ip, secret) {
   if (!token) return false;
   const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
@@ -69,6 +108,8 @@ export default {
       console.error('GitHub issue create failed', res.status, await res.text());
       return json({ errors: [FAIL] }, 502, origin);
     }
+    const issue = await res.json().catch(() => ({}));
+    await notify(env, result.helper, issue.html_url || `https://github.com/${REPO}/issues`);
     return json({ ok: true }, 200, origin);
   },
 };

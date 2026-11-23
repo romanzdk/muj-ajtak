@@ -11,6 +11,7 @@ Web: https://najdiajtaka.cz/
 - Přihláška: formulář `pridat-se.html` → Cloudflare Worker (`worker/index.js`, adresa `https://muj-ajtak.romanzdk.workers.dev/prihlaska`).
   - Worker zkontroluje údaje (`prihlaska.js`), ochranu proti robotům (Turnstile), najde město na mapě a ověří IČO v ARES.
   - Pak založí **soukromé** issue v `romanzdk/muj-ajtak-prihlasky`.
+  - O každé nové přihlášce pošle e-mail na romanzdk@gmail.com (Cloudflare Email Routing, odesílatel prihlasky@najdiajtaka.cz).
 - Schválení: v soukromém repu přidej issue štítek `schvaleno`. Workflow tam ajťáka přidá do `data.json` tady a web se do pár minut aktualizuje. Postup je v README soukromého repa.
 
 ## Ruční přidání nebo odebrání

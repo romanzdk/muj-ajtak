@@ -8,5 +8,9 @@ name = "LIMITER"
 namespace_id = "1001"
 simple = { limit = 5, period = 60 }
 
+[[send_email]]
+name = "NOTIFY"
+destination_address = "romanzdk@gmail.com"
+
 [observability]
 enabled = true

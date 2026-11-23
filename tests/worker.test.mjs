@@ -70,3 +70,26 @@ test('CORS preflight answers 204 without body', async () => {
   assert.equal(res.status, 204);
   assert.equal(res.headers.get('Access-Control-Allow-Origin'), ORIGIN);
 });
+
+import { buildNotifyEmail } from '../worker/index.js';
+
+test('notify e-mail has UTF-8 subject, applicant and issue link', () => {
+  const raw = buildNotifyEmail({ name: 'Jan Novák', city: 'Mnichovice' }, 'https://github.com/romanzdk/muj-ajtak-prihlasky/issues/7', new Date('2026-11-23T10:00:00Z'));
+  assert.match(raw, /^From: .*<prihlasky@najdiajtaka\.cz>$/m);
+  assert.match(raw, /^To: romanzdk@gmail\.com$/m);
+  assert.match(raw, /^Subject: =\?UTF-8\?B\?/m);
+  assert.match(raw, /Content-Type: text\/plain; charset=utf-8/);
+  const body = Buffer.from(raw.split('\r\n\r\n')[1].replace(/\r\n/g, ''), 'base64').toString('utf8');
+  assert.ok(body.includes('Jan Novák, Mnichovice'));
+  assert.ok(body.includes('https://github.com/romanzdk/muj-ajtak-prihlasky/issues/7'));
+  const subject = raw.match(/^Subject: =\?UTF-8\?B\?(.+)\?=$/m)[1];
+  assert.equal(Buffer.from(subject, 'base64').toString('utf8'), 'Nová přihláška: Jan Novák');
+});
+
+test('application still succeeds when the notify e-mail fails', async () => {
+  const orig = globalThis.fetch;
+  globalThis.fetch = async (url, init) => (String(url).includes('api.github.com') ? reply(201, { number: 7, html_url: 'https://github.com/x/y/issues/7' }) : orig(url, init));
+  let sent = 0;
+  const res = await worker.fetch(post(form), { ...env, NOTIFY: { send: async () => { sent++; throw new Error('mail down'); } } });
+  assert.equal(res.status, 200);
+});
