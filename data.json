@@ -43,5 +43,18 @@
     "visits": true,
     "note": "Ukázkový záznam, nejde o skutečného ajťáka. Skuteční ajťáci tu budou brzy.",
     "email": "ukazka@example.com"
+  },
+  {
+    "id": "gh-3",
+    "name": "TEST Pepa",
+    "city": "Brno - Líšeň",
+    "lat": 49.2148,
+    "lon": 16.6995,
+    "phone": "777123456",
+    "services": [
+      "pocitac",
+      "tiskarna"
+    ],
+    "visits": true
   }
 ]
