@@ -16,5 +16,25 @@
     "note": "Windows nemám rád, ale když snesete moje klení, pomůžu vám i s nimi. Jinak pomůžu s čímkoli od Linuxu, od chytrých telefonů až po cloud. Internetové služby jako e-mail, web stránky a podobné také společně zvládneme.",
     "ico": "08386579",
     "icoName": "Bc. Libor Pecháček"
+  },
+  {
+    "id": "p-mwtnaaxu1s4w20m",
+    "name": "Marek Suk",
+    "city": "Senohraby",
+    "lat": 49.8919,
+    "lon": 14.7267,
+    "phone": "+420604942804",
+    "email": "marek@sukovi.cz",
+    "services": [
+      "pocitac",
+      "telefon",
+      "internet",
+      "tiskarna",
+      "ostatni"
+    ],
+    "visits": true,
+    "note": "Vše kolem Windows, Android, sítí, zakázkový vývoj, ale i chytrá domácnost a regulace.\nKaždý problém má řešení. A většinou více než jedno!",
+    "ico": "02451018",
+    "icoName": "Marek Suk"
   }
 ]
