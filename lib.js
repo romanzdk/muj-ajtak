@@ -34,3 +34,9 @@ export function formatDistance(km) {
 export function geocodeQueryUrl(q) {
   return `https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=cz&limit=1&q=${encodeURIComponent(q)}`;
 }
+
+export function formatPhone(phone) {
+  const m = phone.match(/^(\+\d{3})?(\d{3})(\d{3})(\d{3})$/);
+  if (!m) return phone;
+  return [m[1], m[2], m[3], m[4]].filter(Boolean).join(' ');
+}

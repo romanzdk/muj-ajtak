@@ -1,0 +1,5 @@
+[
+  {"id": "ukazka-1", "name": "Ukázka – Jan Novák", "city": "Praha 4 - Michle", "lat": 50.0560, "lon": 14.4520, "phone": "+420777000001", "services": ["pocitac", "telefon"], "visits": true, "note": "Ukázkový záznam, nejde o skutečného ajťáka."},
+  {"id": "ukazka-2", "name": "Ukázka – PC Servis Brno", "city": "Brno - Líšeň", "lat": 49.2100, "lon": 16.6870, "phone": "+420777000002", "web": "https://example.com", "services": ["pocitac", "tiskarna", "internet"], "visits": false, "note": "Ukázkový záznam, nejde o skutečného ajťáka."},
+  {"id": "ukazka-3", "name": "Ukázka – Petra Svobodová", "city": "Ostrava - Poruba", "lat": 49.8300, "lon": 18.1700, "phone": "+420777000003", "services": ["telefon", "internet", "ostatni"], "visits": true, "note": "Ukázkový záznam, nejde o skutečného ajťáka."}
+]

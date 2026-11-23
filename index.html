@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Můj ajťák – pomoc s počítačem a telefonem ve vašem okolí</title>
+  <meta name="description" content="Najděte ajťáka ve svém okolí, který vám pomůže s počítačem, telefonem, internetem nebo tiskárnou.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Můj ajťák</h1>
+    <p class="lead">Najděte člověka ve svém okolí, který vám pomůže s počítačem, telefonem, internetem nebo tiskárnou.</p>
+  </header>
+
+  <main>
+    <section class="search" aria-label="Hledání">
+      <button id="btn-locate" class="big" type="button">📍 Najít v mém okolí</button>
+
+      <form id="place-form">
+        <label for="place-input">Nebo napište své město nebo PSČ:</label>
+        <div class="row">
+          <input id="place-input" type="text" autocomplete="address-level2" placeholder="např. Brno nebo 602 00">
+          <button type="submit" class="big">Hledat</button>
+        </div>
+      </form>
+
+      <fieldset id="services">
+        <legend>S čím potřebujete pomoct? (nemusíte vybírat)</legend>
+        <label><input type="checkbox" name="service" value="pocitac"> Počítač</label>
+        <label><input type="checkbox" name="service" value="telefon"> Telefon a tablet</label>
+        <label><input type="checkbox" name="service" value="internet"> Internet a Wi-Fi</label>
+        <label><input type="checkbox" name="service" value="tiskarna"> Tiskárna</label>
+        <label><input type="checkbox" name="service" value="ostatni"> Ostatní</label>
+      </fieldset>
+
+      <p id="status" aria-live="polite"></p>
+    </section>
+
+    <section aria-label="Seznam ajťáků">
+      <h2>Ajťáci</h2>
+      <ol id="results"></ol>
+    </section>
+
+    <section aria-label="Mapa">
+      <h2>Mapa</h2>
+      <div id="map"></div>
+    </section>
+  </main>
+
+  <footer>
+    <h2>Jste ajťák a chcete pomáhat?</h2>
+    <p><a class="big link-button" href="https://github.com/romanzdk/muj-ajtak/issues/new?template=pridat-se.yml">Přidat se přes GitHub</a></p>
+    <p>Nemáte GitHub? <button type="button" class="js-mail linkish" data-subject="Chci se přidat do Můj ajťák">Napište nám e-mail</button></p>
+    <p>Chcete se ze seznamu odebrat? <button type="button" class="js-mail linkish" data-subject="Odebrání ze seznamu Můj ajťák">Napište nám</button></p>
+    <p><a href="ochrana-udaju.html">Ochrana osobních údajů</a></p>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -44,3 +44,10 @@ test('geocodeQueryUrl limits to CZ and encodes query', () => {
 test('SERVICES has the five categories', () => {
   assert.deepEqual(Object.keys(SERVICES), ['pocitac', 'telefon', 'internet', 'tiskarna', 'ostatni']);
 });
+
+test('formatPhone groups digits for readability', async () => {
+  const { formatPhone } = await import('../lib.js');
+  assert.equal(formatPhone('+420777000002'), '+420 777 000 002');
+  assert.equal(formatPhone('777123456'), '777 123 456');
+  assert.equal(formatPhone('12345'), '12345');
+});
