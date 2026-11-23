@@ -191,6 +191,7 @@ footer.wrap { margin-top: 48px; padding-bottom: 40px; }
 .cta-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .footer-links { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; margin-top: 16px; }
 .footer-links a, .footer-links .linkish { color: var(--muted); }
+.author { color: var(--muted); margin-left: auto; }
 
 /* Simple content page */
 body.plain { background: var(--bg); }
