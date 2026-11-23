@@ -1,5 +1,7 @@
 # Můj ajťák — návrh (v1)
 
+> Aktualizace 2026-11-23: přihlášky už nejdou přes GitHub issue, ale přes formulář → Cloudflare Worker → soukromé repo. Web se jmenuje Najdi ajťáka (najdiajtaka.cz). Aktuální stav je v README.md.
+
 ## Proč
 Lidé (hlavně senioři), kteří potřebují pomoc s IT a nevědí, kde ji hledat, najdou ajťáka ve svém okolí a zavolají mu.
 

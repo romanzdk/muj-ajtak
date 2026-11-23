@@ -1,5 +1,7 @@
 # Můj ajťák — Implementation Plan
 
+> Aktualizace 2026-11-23: přihlášky už nejdou přes GitHub issue, ale přes formulář → Cloudflare Worker → soukromé repo. Web se jmenuje Najdi ajťáka (najdiajtaka.cz). Aktuální stav je v README.md.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Static web where people (mainly seniors) find an IT helper near them in a list sorted by distance and on a map; helpers join via a GitHub issue form that a GitHub Action turns into a PR for manual approval.
