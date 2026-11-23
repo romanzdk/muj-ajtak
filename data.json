@@ -43,5 +43,19 @@
     "visits": true,
     "note": "Ukázkový záznam, nejde o skutečného ajťáka. Skuteční ajťáci tu budou brzy.",
     "email": "ukazka@example.com"
+  },
+  {
+    "id": "p-mwtaieu1vj1vgw",
+    "name": "TEST Jan Zkušební",
+    "city": "Mnichovice",
+    "lat": 49.936,
+    "lon": 14.7097,
+    "phone": "777000111",
+    "services": [
+      "pocitac",
+      "telefon"
+    ],
+    "visits": true,
+    "note": "Testovací přihláška"
   }
 ]
