@@ -1,0 +1,30 @@
+@font-face { font-family: 'Plus Jakarta Sans'; font-weight: 400 800; src: url(../fonts/jakarta-latin-ext.woff2) format('woff2'); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF; }
+@font-face { font-family: 'Plus Jakarta Sans'; font-weight: 400 800; src: url(../fonts/jakarta-latin.woff2) format('woff2'); }
+@page { size: A5; margin: 0; }
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  width: 148mm; height: 210mm; overflow: hidden;
+  font: 13pt/1.4 'Plus Jakarta Sans', sans-serif; color: #0f172a;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+  display: flex; flex-direction: column;
+}
+header {
+  color: #fff; padding: 11mm 11mm 9mm;
+  background: radial-gradient(90mm 50mm at 100% 0, rgb(167 139 250 / .55), transparent 70%), linear-gradient(135deg, #1e1b4b, #4338ca);
+}
+.brand { display: flex; align-items: center; gap: 3mm; font-weight: 800; font-size: 13pt; }
+.logo { width: 9mm; height: 9mm; border-radius: 2.5mm; background: rgb(255 255 255 / .15); border: .3mm solid rgb(255 255 255 / .3); display: grid; place-items: center; }
+.logo svg { width: 5.5mm; height: 5.5mm; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+h1 { font-size: 25pt; line-height: 1.08; letter-spacing: -.5pt; margin: 7mm 0 3mm; font-weight: 800; }
+h1 span { color: #c4b5fd; }
+header p { margin: 0; font-size: 13pt; opacity: .92; }
+main { flex: 1; padding: 8mm 11mm 0; }
+ul.points { list-style: none; padding: 0; margin: 0; display: grid; gap: 3.2mm; }
+ul.points li { display: flex; gap: 3mm; align-items: flex-start; font-size: 13pt; }
+ul.points li b { flex: none; width: 7mm; height: 7mm; border-radius: 50%; background: #eef2ff; color: #4f46e5; display: grid; place-items: center; font-size: 11pt; }
+.safety { margin-top: 6mm; padding: 3.5mm 4.5mm; border-radius: 4mm; background: #fff7ed; border: .4mm solid #fed7aa; color: #7c2d12; font-size: 11pt; }
+footer { display: flex; align-items: center; gap: 6mm; margin: 6mm 11mm 10mm; padding: 5mm; border-radius: 5mm; background: #f5f6fb; }
+footer img { width: 38mm; height: 38mm; flex: none; padding: 3mm; background: #fff; border-radius: 2mm; }
+footer .cta { font-weight: 800; font-size: 15pt; line-height: 1.2; }
+footer .url { font-size: 10pt; color: #475569; margin-top: 2mm; }
