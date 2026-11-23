@@ -54,6 +54,21 @@ async function notify(env, helper, issueUrl) {
   }
 }
 
+const withoutId = (body) => body.replace(/"id": "[^"]*"/, '');
+
+// People often press submit twice or resend after a reload; an identical application from the last hour is not created again.
+async function alreadySent(result, headers) {
+  try {
+    const res = await fetch(`https://api.github.com/repos/${REPO}/issues?state=all&per_page=30`, { headers });
+    const list = res.ok ? await res.json() : [];
+    const hourAgo = Date.now() - 3600e3;
+    return Array.isArray(list) && list.some((i) => i.title === result.title
+      && Date.parse(i.created_at) > hourAgo && withoutId(i.body || '') === withoutId(result.body));
+  } catch {
+    return false;
+  }
+}
+
 async function turnstileOk(token, ip, secret) {
   if (!token) return false;
   const res = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
@@ -95,13 +110,15 @@ export default {
     const result = await processApplication(raw, { id });
     if (result.errors) return json({ errors: result.errors }, 422, origin);
 
+    const headers = {
+      Authorization: `Bearer ${env.GITHUB_TOKEN}`,
+      Accept: 'application/vnd.github+json',
+      'User-Agent': 'muj-ajtak-worker',
+    };
+    if (await alreadySent(result, headers)) return json({ ok: true, duplicate: true }, 200, origin);
     const res = await fetch(`https://api.github.com/repos/${REPO}/issues`, {
       method: 'POST',
-      headers: {
-        Authorization: `Bearer ${env.GITHUB_TOKEN}`,
-        Accept: 'application/vnd.github+json',
-        'User-Agent': 'muj-ajtak-worker',
-      },
+      headers,
       body: JSON.stringify({ title: result.title, body: result.body }),
     });
     if (!res.ok) {

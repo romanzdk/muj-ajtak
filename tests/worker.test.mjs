@@ -28,7 +28,7 @@ beforeEach(() => {
 test('valid application creates a private issue', async () => {
   const res = await worker.fetch(post(form), env);
   assert.equal(res.status, 200);
-  const gh = calls.find((c) => c.url.includes('api.github.com'));
+  const gh = calls.find((c) => c.url.includes('api.github.com') && c.init.method === 'POST');
   assert.ok(gh.url.endsWith('/repos/romanzdk/muj-ajtak-prihlasky/issues'));
   assert.equal(gh.init.headers.Authorization, 'Bearer t');
   assert.equal(res.headers.get('Access-Control-Allow-Origin'), ORIGIN);
@@ -92,4 +92,25 @@ test('application still succeeds when the notify e-mail fails', async () => {
   let sent = 0;
   const res = await worker.fetch(post(form), { ...env, NOTIFY: { send: async () => { sent++; throw new Error('mail down'); } } });
   assert.equal(res.status, 200);
+});
+
+test('identical application sent again within an hour is not created twice', async () => {
+  const issues = [];
+  globalThis.fetch = async (url, init) => {
+    if (String(url).includes('turnstile')) return reply(200, { success: true });
+    if (String(url).includes('nominatim')) return reply(200, [{ lat: '49.936', lon: '14.709', display_name: 'Mnichovice' }]);
+    if (init?.method === 'POST') {
+      const b = JSON.parse(init.body);
+      issues.push({ ...b, created_at: new Date().toISOString() });
+      return reply(201, { number: issues.length });
+    }
+    return reply(200, issues);
+  };
+  assert.equal((await worker.fetch(post(form), env)).status, 200);
+  const second = await worker.fetch(post(form), env);
+  assert.equal(second.status, 200);
+  assert.equal((await second.json()).ok, true);
+  assert.equal(issues.length, 1);
+  await worker.fetch(post({ ...form, note: 'Oprava poznámky' }), env);
+  assert.equal(issues.length, 2);
 });

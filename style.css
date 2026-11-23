@@ -248,4 +248,5 @@ body.plain { background: var(--bg); }
 .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 .cf-turnstile { margin-top: 20px; }
 .form-errors { margin-top: 16px; padding: 12px 20px; border-radius: 16px; background: #fef2f2; border: 2px solid #fecaca; color: #991b1b; font-weight: 600; }
+.already { margin-top: 16px; padding: 16px 20px; border-radius: var(--radius); background: var(--ok-soft); color: var(--ok-text); }
 .thanks { margin-top: 24px; padding: 24px; border-radius: var(--radius); background: var(--ok-soft); color: var(--ok-text); }

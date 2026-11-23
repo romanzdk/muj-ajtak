@@ -16,8 +16,30 @@ function showErrors(errors) {
   errorsEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
+const SENT_KEY = 'prihlaska-odeslana';
+const thanks = document.querySelector('#thanks');
+
+function showThanks() {
+  form.hidden = true;
+  document.querySelector('#already').hidden = true;
+  thanks.hidden = false;
+  window.scrollTo({ top: 0 });
+  thanks.focus();
+}
+
+try {
+  const sentAt = localStorage.getItem(SENT_KEY);
+  if (sentAt) {
+    const el = document.querySelector('#already');
+    el.querySelector('time').textContent = new Date(Number(sentAt)).toLocaleDateString('cs-CZ');
+    el.hidden = false;
+  }
+} catch {}
+
+let sending = false;
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
+  if (sending) return;
   const fd = new FormData(form);
   const payload = {
     name: fd.get('name'),
@@ -35,8 +57,13 @@ form.addEventListener('submit', async (e) => {
     turnstileToken: fd.get('cf-turnstile-response'),
   };
   const btn = form.querySelector('button[type="submit"]');
+  const label = btn.textContent;
+  sending = true;
   btn.disabled = true;
+  btn.textContent = 'Odesílám, chvilku strpení…';
+  form.inert = true;
   errorsEl.hidden = true;
+  let sent = false;
   try {
     const res = await fetch(ENDPOINT, {
       method: 'POST',
@@ -45,17 +72,21 @@ form.addEventListener('submit', async (e) => {
     });
     const data = await res.json().catch(() => ({}));
     if (res.ok && data.ok) {
-      form.hidden = true;
-      const thanks = document.querySelector('#thanks');
-      thanks.hidden = false;
-      thanks.focus();
+      sent = true;
+      try { localStorage.setItem(SENT_KEY, String(Date.now())); } catch {}
+      showThanks();
       return;
     }
     showErrors(data.errors || ['Odeslání se nepovedlo. Zkuste to prosím znovu.']);
   } catch {
     showErrors(['Odeslání se nepovedlo. Zkontrolujte připojení k internetu a zkuste to znovu.']);
   } finally {
-    btn.disabled = false;
-    window.turnstile?.reset();
+    if (!sent) {
+      sending = false;
+      form.inert = false;
+      btn.disabled = false;
+      btn.textContent = label;
+      window.turnstile?.reset();
+    }
   }
 });
