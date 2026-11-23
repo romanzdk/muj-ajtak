@@ -1,0 +1,63 @@
+name: Přidat se jako ajťák
+description: Přihláška do seznamu Můj ajťák. Po kontrole vás přidáme na web.
+title: "Přihláška: "
+labels: [prihlaska]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Díky, že chcete pomáhat! Vyplňte prosím údaje, které se zobrazí na webu.
+        Přesnou adresu nevyplňujte, stačí město nebo jeho část.
+  - type: input
+    attributes:
+      label: Jméno nebo název firmy
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Město nebo část města
+      description: Např. „Brno - Líšeň“ nebo „Praha 4“. Podle toho vás najdeme na mapě.
+    validations:
+      required: true
+  - type: input
+    attributes:
+      label: Telefon
+      description: Vyplňte telefon nebo e-mail (aspoň jedno).
+  - type: input
+    attributes:
+      label: E-mail
+  - type: input
+    attributes:
+      label: Web
+      description: Celá adresa včetně https://
+  - type: checkboxes
+    attributes:
+      label: S čím pomáháte
+      options:
+        - label: Počítač
+        - label: Telefon a tablet
+        - label: Internet a Wi-Fi
+        - label: Tiskárna
+        - label: Ostatní
+  - type: dropdown
+    attributes:
+      label: Přijedete i domů?
+      options:
+        - Ano
+        - Ne
+    validations:
+      required: true
+  - type: textarea
+    attributes:
+      label: Krátká poznámka
+      description: Max. 300 znaků. Např. „Pomůžu s nastavením mobilu, ceny po domluvě.“
+  - type: input
+    attributes:
+      label: IČO (nepovinné)
+      description: Pokud máte živnost nebo firmu. Ověříme ho v registru ARES a u záznamu se zobrazí „Ověřené IČO“.
+  - type: checkboxes
+    attributes:
+      label: Souhlas
+      options:
+        - label: Souhlasím se zveřejněním těchto údajů na webu
+          required: true
