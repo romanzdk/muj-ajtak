@@ -7,5 +7,5 @@ export function openMail(subject) {
 
 document.addEventListener('click', (e) => {
   const el = e.target.closest('.js-mail');
-  if (el) openMail(el.dataset.subject || 'Můj ajťák');
+  if (el) openMail(el.dataset.subject || 'Najdi ajťáka');
 });

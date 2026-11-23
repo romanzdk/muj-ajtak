@@ -1,4 +1,4 @@
-# Můj ajťák
+# Najdi ajťáka
 
 Jednoduchý web, kde lidé (hlavně senioři) najdou ajťáka ve svém okolí: seznam seřazený podle vzdálenosti, mapa a hledání podle polohy nebo města / PSČ.
 

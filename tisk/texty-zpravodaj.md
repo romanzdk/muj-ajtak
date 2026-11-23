@@ -6,7 +6,7 @@
 
 Hodně lidí v okolí, hlavně seniorů, potřebuje občas pomoct s technikou: nastavit nový mobil, rozchodit Wi-Fi, připojit tiskárnu nebo zavolat přes video vnoučatům. Často ale nevědí, koho poprosit.
 
-Proto vzniká web **Můj ajťák**. Je to jednoduchý seznam lidí z okolí, kteří s technikou pomůžou. Senior nebo jeho rodina na mapě najde nejbližšího ajťáka a zavolá mu.
+Proto vzniká web **Najdi ajťáka**. Je to jednoduchý seznam lidí z okolí, kteří s technikou pomůžou. Senior nebo jeho rodina na mapě najde nejbližšího ajťáka a zavolá mu.
 
 Teď hledáme první ajťáky z Mnichovic, Říčan a okolí. Nemusíte být profesionál, stačí, když rozumíte základům a máte trpělivost. Hodí se to i pro studenty.
 
@@ -22,7 +22,7 @@ Roman Žydyk, Mnichovice
 
 **Nefunguje počítač nebo mobil? Pomoc najdete kousek od vás**
 
-Na webu **Můj ajťák** najdete lidi z okolí, kteří pomůžou s počítačem, mobilem, internetem nebo tiskárnou. Někteří přijedou až domů.
+Na webu **Najdi ajťáka** najdete lidi z okolí, kteří pomůžou s počítačem, mobilem, internetem nebo tiskárnou. Někteří přijedou až domů.
 
 1. Otevřete **romanzdk.github.io/muj-ajtak** (nebo poproste děti či vnoučata).
 2. Klikněte na „Najít v mém okolí“, nebo napište své město.
@@ -36,7 +36,7 @@ Roman Žydyk, Mnichovice
 
 ## 3. Facebook (místní skupiny, stránka města)
 
-Ahoj sousedi 👋 Spouštím web **Můj ajťák**: seznam lidí z okolí, kteří pomůžou hlavně seniorům s počítačem, mobilem nebo Wi-Fi. Senior nebo jeho děti najdou na mapě nejbližšího ajťáka a zavolají mu.
+Ahoj sousedi 👋 Spouštím web **Najdi ajťáka**: seznam lidí z okolí, kteří pomůžou hlavně seniorům s počítačem, mobilem nebo Wi-Fi. Senior nebo jeho děti najdou na mapě nejbližšího ajťáka a zavolají mu.
 
 Hledám prvních pár ajťáků z Mnichovic, Říčan a okolí. Přidání trvá 3 minuty, je zdarma a bez provize, cenu si určujete sami. Hodí se i pro studenty.
 
@@ -51,7 +51,7 @@ Předmět: Příspěvek do Života Mnichovic
 
 Dobrý den,
 
-rád bych do Života Mnichovic poslal krátký příspěvek (asi 1 200 znaků) o neziskovém webu Můj ajťák. Pomáhá seniorům najít v okolí člověka, který jim poradí s počítačem nebo mobilem. Teď hledám první dobrovolníky a ajťáky z Mnichovic.
+rád bych do Života Mnichovic poslal krátký příspěvek (asi 1 200 znaků) o neziskovém webu Najdi ajťáka. Pomáhá seniorům najít v okolí člověka, který jim poradí s počítačem nebo mobilem. Teď hledám první dobrovolníky a ajťáky z Mnichovic.
 
 Můžete mi prosím napsat, komu příspěvek poslat a do kdy je uzávěrka příštího čísla? Přikládám i leták A5, kdyby šel vyvěsit na úřední desku nebo do vývěsky.
 
