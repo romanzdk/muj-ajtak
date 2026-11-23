@@ -179,6 +179,17 @@ h2 { font-size: 1.5rem; letter-spacing: -0.01em; margin: 16px 0; display: flex; 
 .leaflet-popup-content-wrapper { border-radius: 14px; }
 .leaflet-popup-content { font: 16px/1.4 "Plus Jakarta Sans", sans-serif; }
 
+/* Info + FAQ */
+.info.wrap { margin-top: 40px; }
+.info-grid { display: grid; gap: 8px 32px; }
+.steps { padding-left: 1.4em; margin: 0; display: grid; gap: 10px; }
+.helps { padding-left: 1.2em; margin: 0; display: grid; gap: 10px; }
+.faq { display: grid; gap: 10px; }
+.faq details { background: var(--surface); border-radius: 16px; box-shadow: var(--shadow); padding: 4px 20px; }
+.faq summary { cursor: pointer; font-weight: 700; padding: 12px 0; min-height: 48px; }
+.faq details p { margin: 0 0 14px; color: var(--muted); }
+@media (min-width: 960px) { .info-grid { grid-template-columns: 1fr 1fr; } }
+
 /* Footer */
 footer.wrap { margin-top: 48px; padding-bottom: 40px; }
 .cta {
