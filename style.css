@@ -219,3 +219,21 @@ body.plain { background: var(--bg); }
   #status:not(:empty) { color: #e0e7ff; }
   .safety { background: #2a1a0e; border-color: #7c2d12; color: #fed7aa; }
 }
+
+/* Join form */
+.join { display: grid; gap: 6px; margin-top: 24px; }
+.join > label:not(.check) { font-weight: 700; margin-top: 16px; }
+.join input:not([type="checkbox"]):not([type="radio"]), .join textarea {
+  width: 100%; min-height: 56px; padding: 10px 16px; font: inherit;
+  border: 2px solid var(--line); border-radius: 16px; background: var(--surface); color: var(--text);
+}
+.join input:focus, .join textarea:focus { border-color: var(--accent); outline: none; box-shadow: 0 0 0 4px var(--accent-soft); }
+.join fieldset { margin-top: 20px; }
+.join .btn-xl { margin-top: 20px; }
+.hint { color: var(--muted); font-size: 0.95rem; margin: 2px 0 0; }
+.check { display: flex; gap: 12px; align-items: flex-start; margin-top: 16px; }
+.check input { width: 28px; height: 28px; flex: none; margin-top: 2px; }
+.hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+.cf-turnstile { margin-top: 20px; }
+.form-errors { margin-top: 16px; padding: 12px 20px; border-radius: 16px; background: #fef2f2; border: 2px solid #fecaca; color: #991b1b; font-weight: 600; }
+.thanks { margin-top: 24px; padding: 24px; border-radius: var(--radius); background: var(--ok-soft); color: var(--ok-text); }

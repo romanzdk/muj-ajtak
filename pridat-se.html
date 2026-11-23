@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="cs">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Přidat se jako ajťák – Můj ajťák</title>
+  <meta name="description" content="Umíte poradit s počítačem nebo mobilem? Přidejte se do seznamu Můj ajťák a pomáhejte lidem ve svém okolí.">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src https://muj-ajtak.romanzdk.workers.dev; font-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <link rel="canonical" href="https://romanzdk.github.io/muj-ajtak/pridat-se.html">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+</head>
+<body class="plain">
+  <main class="wrap page">
+    <p><a href="./">← Zpět na hledání</a></p>
+    <h1>Přidat se jako ajťák</h1>
+    <p>Umíte poradit s počítačem nebo mobilem? Vyplňte formulář. Přihlášku si přečteme, případně vám zavoláme, a po schválení vás přidáme na web. Přidání je zdarma a bez provize.</p>
+
+    <form id="join" class="join" novalidate>
+      <label for="f-name">Jméno nebo název firmy *</label>
+      <input id="f-name" name="name" required maxlength="100" autocomplete="name">
+
+      <label for="f-city">Město nebo část města *</label>
+      <input id="f-city" name="city" required maxlength="100" placeholder="např. Mnichovice nebo Praha 4">
+      <p class="hint">Přesnou adresu nepište. Podle města vás najdeme na mapě.</p>
+
+      <label for="f-phone">Telefon</label>
+      <input id="f-phone" name="phone" type="tel" maxlength="40" autocomplete="tel" placeholder="777 123 456">
+
+      <label for="f-email">E-mail</label>
+      <input id="f-email" name="email" type="email" maxlength="200" autocomplete="email">
+      <p class="hint">Vyplňte telefon nebo e-mail (aspoň jedno). Obojí se zobrazí na webu.</p>
+
+      <label for="f-web">Web (nepovinné)</label>
+      <input id="f-web" name="web" type="url" maxlength="200" placeholder="https://">
+
+      <fieldset>
+        <legend>S čím pomáháte? *</legend>
+        <div class="chips">
+          <label class="chip"><input type="checkbox" name="services" value="pocitac"><span>💻 Počítač</span></label>
+          <label class="chip"><input type="checkbox" name="services" value="telefon"><span>📱 Telefon a tablet</span></label>
+          <label class="chip"><input type="checkbox" name="services" value="internet"><span>📶 Internet a Wi-Fi</span></label>
+          <label class="chip"><input type="checkbox" name="services" value="tiskarna"><span>🖨️ Tiskárna</span></label>
+          <label class="chip"><input type="checkbox" name="services" value="ostatni"><span>✨ Něco jiného</span></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Přijedete i k lidem domů?</legend>
+        <div class="chips">
+          <label class="chip"><input type="radio" name="visits" value="ano" checked><span>Ano</span></label>
+          <label class="chip"><input type="radio" name="visits" value="ne"><span>Ne</span></label>
+        </div>
+      </fieldset>
+
+      <label for="f-note">Krátká poznámka (nepovinné)</label>
+      <textarea id="f-note" name="note" maxlength="300" rows="3" placeholder="např. Pomůžu s nastavením mobilu, cena po domluvě."></textarea>
+
+      <label for="f-ico">IČO (nepovinné)</label>
+      <input id="f-ico" name="ico" inputmode="numeric" maxlength="12">
+      <p class="hint">Když máte živnost nebo firmu a název v registru ARES sedí k vašemu jménu, zobrazíme u vás „IČO v registru ARES“.</p>
+
+      <div class="hp" aria-hidden="true">
+        <label for="f-website">Nevyplňujte</label>
+        <input id="f-website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+
+      <label class="check"><input type="checkbox" name="consentPublish"> Souhlasím se zveřejněním vyplněných údajů na webu Můj ajťák. *</label>
+      <label class="check"><input type="checkbox" name="consentProcessing"> Beru na vědomí <a href="ochrana-udaju.html">zásady ochrany osobních údajů</a>. Souhlas můžu kdykoli odvolat e-mailem. *</label>
+
+      <div class="cf-turnstile" data-sitekey="0x4AAAAAAGO15uQMOa_sAfYf" data-language="cs"></div>
+
+      <div id="form-errors" class="form-errors" role="alert" hidden></div>
+      <button type="submit" class="btn btn-primary btn-xl">Odeslat přihlášku</button>
+    </form>
+
+    <div id="thanks" class="thanks" hidden tabindex="-1">
+      <h2>Díky, přihláška je odeslaná!</h2>
+      <p>Přihlášku si přečteme a možná vám zavoláme. Po schválení se objevíte na webu, obvykle do několika dní.</p>
+      <p><a href="./">← Zpět na hledání</a></p>
+    </div>
+
+    <p class="hint">Nechcete vyplňovat formulář? <button type="button" class="js-mail linkish" data-subject="Chci se přidat do Můj ajťák">Napište nám e-mail</button>.</p>
+  </main>
+  <script type="module" src="pridat-se.js"></script>
+</body>
+</html>
