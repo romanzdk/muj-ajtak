@@ -64,3 +64,9 @@ test('GitHub failure gives friendly 502', async () => {
   const res = await worker.fetch(post(form), env);
   assert.equal(res.status, 502);
 });
+
+test('CORS preflight answers 204 without body', async () => {
+  const res = await worker.fetch(new Request('https://w.example/prihlaska', { method: 'OPTIONS', headers: { Origin: ORIGIN } }), env);
+  assert.equal(res.status, 204);
+  assert.equal(res.headers.get('Access-Control-Allow-Origin'), ORIGIN);
+});

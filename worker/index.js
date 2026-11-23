@@ -4,7 +4,7 @@ const ALLOWED_ORIGINS = ['https://romanzdk.github.io'];
 const REPO = 'romanzdk/muj-ajtak-prihlasky';
 const FAIL = 'Odeslání se nepovedlo. Zkuste to prosím později, nebo nám napište e-mail (odkaz je dole na stránce).';
 
-const json = (data, status, origin) => new Response(JSON.stringify(data), {
+const json = (data, status, origin) => new Response(status === 204 ? null : JSON.stringify(data), {
   status,
   headers: {
     'Content-Type': 'application/json; charset=utf-8',

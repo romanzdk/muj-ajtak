@@ -1,3 +1,5 @@
 .superpowers/
 node_modules/
 pr-body.md
+.dev.vars
+.wrangler/
