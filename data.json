@@ -1,1 +1,20 @@
-[]
+[
+  {
+    "id": "p-mwtl3bg6um727z",
+    "name": "Libor Pecháček",
+    "city": "Mnichovice",
+    "lat": 49.936,
+    "lon": 14.7097,
+    "phone": "776260372",
+    "email": "farco@seznam.cz",
+    "services": [
+      "pocitac",
+      "telefon",
+      "internet"
+    ],
+    "visits": true,
+    "note": "Windows nemám rád, ale když snesete moje klení, pomůžu vám i s nimi. Jinak pomůžu s čímkoli od Linuxu, od chytrých telefonů až po cloud. Internetové služby jako e-mail, web stránky a podobné také společně zvládneme.",
+    "ico": "08386579",
+    "icoName": "Bc. Libor Pecháček"
+  }
+]
