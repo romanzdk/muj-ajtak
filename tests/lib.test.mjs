@@ -51,3 +51,11 @@ test('formatPhone groups digits for readability', async () => {
   assert.equal(formatPhone('777123456'), '777 123 456');
   assert.equal(formatPhone('12345'), '12345');
 });
+
+test('initials takes first letters of first two words, skipping dashes', async () => {
+  const { initials } = await import('../lib.js');
+  assert.equal(initials('Jan Novák'), 'JN');
+  assert.equal(initials('Ukázka – Petra Svobodová'), 'UP');
+  assert.equal(initials('šimon'), 'Š');
+  assert.equal(initials('<b>'), '?');
+});

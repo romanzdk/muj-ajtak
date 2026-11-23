@@ -5,56 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Můj ajťák – pomoc s počítačem a telefonem ve vašem okolí</title>
   <meta name="description" content="Najděte ajťáka ve svém okolí, který vám pomůže s počítačem, telefonem, internetem nebo tiskárnou.">
+  <meta name="theme-color" content="#312e81">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%234f46e5'/%3E%3Cpath d='M9 11h14v9H9z M7 23h18' stroke='white' stroke-width='2.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" integrity="sha512-h9FcoyWjHcOcmEVkxOfTLnmZFWIH0iZhZT1H2TbOq55xssQGEJHEaIm+PgoUaZbRvQTNTluNOEfb1ZRy6D3BOw==" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header>
-    <h1>Můj ajťák</h1>
-    <p class="lead">Najděte člověka ve svém okolí, který vám pomůže s počítačem, telefonem, internetem nebo tiskárnou.</p>
+  <header class="hero">
+    <div class="wrap">
+      <a class="brand" href="./" aria-label="Můj ajťák – úvod">
+        <span class="logo" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M5 6h14v9H5z M3 19h18"/></svg>
+        </span>
+        Můj ajťák
+      </a>
+
+      <h1>Pomoc s technikou,<br><span>kousek od vás.</span></h1>
+      <p class="lead">Najděte šikovného člověka ve svém okolí, který vám pomůže s počítačem, telefonem, internetem nebo tiskárnou.</p>
+
+      <section class="search-card" aria-label="Hledání">
+        <button id="btn-locate" class="btn btn-primary btn-xl" type="button">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
+          Najít v mém okolí
+        </button>
+
+        <div class="divider"><span>nebo</span></div>
+
+        <form id="place-form">
+          <label for="place-input">Napište své město nebo PSČ</label>
+          <div class="row">
+            <input id="place-input" type="text" autocomplete="address-level2" placeholder="např. Brno nebo 602 00">
+            <button type="submit" class="btn btn-dark">Hledat</button>
+          </div>
+        </form>
+
+        <fieldset id="services">
+          <legend>S čím potřebujete pomoct? <span class="muted">(nemusíte vybírat)</span></legend>
+          <div class="chips">
+            <label class="chip"><input type="checkbox" name="service" value="pocitac"><span>💻 Počítač</span></label>
+            <label class="chip"><input type="checkbox" name="service" value="telefon"><span>📱 Telefon a tablet</span></label>
+            <label class="chip"><input type="checkbox" name="service" value="internet"><span>📶 Internet a Wi-Fi</span></label>
+            <label class="chip"><input type="checkbox" name="service" value="tiskarna"><span>🖨️ Tiskárna</span></label>
+            <label class="chip"><input type="checkbox" name="service" value="ostatni"><span>✨ Ostatní</span></label>
+          </div>
+        </fieldset>
+      </section>
+    </div>
   </header>
 
-  <main>
-    <section class="search" aria-label="Hledání">
-      <button id="btn-locate" class="big" type="button">📍 Najít v mém okolí</button>
-
-      <form id="place-form">
-        <label for="place-input">Nebo napište své město nebo PSČ:</label>
-        <div class="row">
-          <input id="place-input" type="text" autocomplete="address-level2" placeholder="např. Brno nebo 602 00">
-          <button type="submit" class="big">Hledat</button>
-        </div>
-      </form>
-
-      <fieldset id="services">
-        <legend>S čím potřebujete pomoct? (nemusíte vybírat)</legend>
-        <label><input type="checkbox" name="service" value="pocitac"> Počítač</label>
-        <label><input type="checkbox" name="service" value="telefon"> Telefon a tablet</label>
-        <label><input type="checkbox" name="service" value="internet"> Internet a Wi-Fi</label>
-        <label><input type="checkbox" name="service" value="tiskarna"> Tiskárna</label>
-        <label><input type="checkbox" name="service" value="ostatni"> Ostatní</label>
-      </fieldset>
-
-      <p id="status" aria-live="polite"></p>
-    </section>
-
-    <section aria-label="Seznam ajťáků">
-      <h2>Ajťáci</h2>
-      <ol id="results"></ol>
-    </section>
-
-    <section aria-label="Mapa">
-      <h2>Mapa</h2>
-      <div id="map"></div>
-    </section>
+  <main class="wrap">
+    <p id="status" aria-live="polite"></p>
+    <div class="layout">
+      <section aria-label="Seznam ajťáků">
+        <h2>Ajťáci <span id="count" class="count"></span></h2>
+        <ol id="results"></ol>
+      </section>
+      <section class="map-col" aria-label="Mapa">
+        <h2 class="sr-only">Mapa</h2>
+        <div id="map"></div>
+      </section>
+    </div>
   </main>
 
-  <footer>
-    <h2>Jste ajťák a chcete pomáhat?</h2>
-    <p><a class="big link-button" href="https://github.com/romanzdk/muj-ajtak/issues/new?template=pridat-se.yml">Přidat se přes GitHub</a></p>
-    <p>Nemáte GitHub? <button type="button" class="js-mail linkish" data-subject="Chci se přidat do Můj ajťák">Napište nám e-mail</button></p>
-    <p>Chcete se ze seznamu odebrat? <button type="button" class="js-mail linkish" data-subject="Odebrání ze seznamu Můj ajťák">Napište nám</button></p>
-    <p><a href="ochrana-udaju.html">Ochrana osobních údajů</a></p>
+  <footer class="wrap">
+    <section class="cta">
+      <div>
+        <h2>Jste ajťák a chcete pomáhat?</h2>
+        <p>Přidejte se do seznamu. Každou přihlášku ručně kontrolujeme.</p>
+      </div>
+      <div class="cta-actions">
+        <a class="btn btn-light" href="https://github.com/romanzdk/muj-ajtak/issues/new?template=pridat-se.yml">Přidat se přes GitHub</a>
+        <button type="button" class="btn btn-ghost js-mail" data-subject="Chci se přidat do Můj ajťák">Nemám GitHub – napsat e-mail</button>
+      </div>
+    </section>
+    <nav class="footer-links">
+      <button type="button" class="linkish js-mail" data-subject="Odebrání ze seznamu Můj ajťák">Chci se ze seznamu odebrat</button>
+      <a href="ochrana-udaju.html">Ochrana osobních údajů</a>
+    </nav>
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" integrity="sha512-puJW3E/qXDqYp9IfhAI54BJEaWIfloJ7JWs7OeD5i6ruC9JZL1gERT1wjtwXFlh7CjE7ZJ+/vcRZRkIYIb6p4g==" crossorigin="anonymous"></script>

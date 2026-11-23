@@ -40,3 +40,8 @@ export function formatPhone(phone) {
   if (!m) return phone;
   return [m[1], m[2], m[3], m[4]].filter(Boolean).join(' ');
 }
+
+export function initials(name) {
+  const words = name.split(/\s+/).filter((w) => /^\p{L}/u.test(w));
+  return words.slice(0, 2).map((w) => w[0].toUpperCase()).join('') || '?';
+}

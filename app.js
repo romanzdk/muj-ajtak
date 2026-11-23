@@ -1,4 +1,4 @@
-import { SERVICES, sortByDistance, filterByServices, formatDistance, formatPhone, geocodeQueryUrl } from './lib.js';
+import { SERVICES, sortByDistance, filterByServices, formatDistance, formatPhone, geocodeQueryUrl, initials } from './lib.js';
 import { openMail } from './mail.js';
 
 const $ = (sel) => document.querySelector(sel);
@@ -32,37 +32,78 @@ function currentList() {
   return origin ? sortByDistance(filtered, origin) : [...filtered].sort((a, b) => a.name.localeCompare(b.name, 'cs'));
 }
 
+const ICONS = {
+  pin: 'M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z M12 7a2.5 2.5 0 1 0 0 5a2.5 2.5 0 1 0 0-5',
+  phone: 'M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2',
+  mail: 'M3 6h18v12H3z M3 7l9 6 9-6',
+  web: 'M12 3a9 9 0 1 0 0 18a9 9 0 1 0 0-18 M3 12h18 M12 3c3 3.5 3 14.5 0 18 M12 3c-3 3.5-3 14.5 0 18',
+};
+
+function icon(name) {
+  const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+  svg.setAttribute('viewBox', '0 0 24 24');
+  svg.setAttribute('aria-hidden', 'true');
+  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  path.setAttribute('d', ICONS[name]);
+  svg.append(path);
+  return svg;
+}
+
+function linkButton(className, href, iconName, text) {
+  const a = el('a', `btn ${className}`);
+  a.href = href;
+  a.append(icon(iconName), document.createTextNode(text));
+  return a;
+}
+
+let activeId = null;
+
+function focusHelper(id) {
+  activeId = id;
+  for (const c of resultsEl.querySelectorAll('.card')) c.classList.toggle('active', c.dataset.id === id);
+  const m = markers.get(id);
+  if (!m) return;
+  map.setView(m.getLatLng(), 13);
+  m.openPopup();
+}
+
 function renderItem(h) {
-  const li = el('li');
+  const li = el('li', 'card');
   li.tabIndex = 0;
-  li.append(el('p', 'name', h.name));
-  const place = h.distanceKm !== undefined ? `${formatDistance(h.distanceKm)} · ${h.city}` : h.city;
-  li.append(el('p', 'place', place));
-  if (h.icoVerified) li.append(el('p', 'badge', '✔ Ověřené IČO'));
-  li.append(el('p', null, h.services.map((s) => SERVICES[s]).filter(Boolean).join(', ')));
-  if (h.visits) li.append(el('p', null, '🏠 Přijede i k vám domů'));
-  if (h.note) li.append(el('p', null, h.note));
-  if (h.phone) {
-    const a = el('a', 'phone', `📞 ${formatPhone(h.phone)}`);
-    a.href = `tel:${h.phone}`;
-    li.append(a);
-  }
-  if (h.email) {
-    const p = el('p');
-    const a = el('a', null, `✉️ ${h.email}`);
-    a.href = `mailto:${h.email}`;
-    p.append(a);
-    li.append(p);
-  }
+  li.dataset.id = h.id;
+  if (h.id === activeId) li.classList.add('active');
+
+  const head = el('div', 'card-head');
+  const avatar = el('div', 'avatar', initials(h.name));
+  avatar.setAttribute('aria-hidden', 'true');
+  const who = el('div', 'who');
+  who.append(el('p', 'name', h.name));
+  const place = el('p', 'place');
+  place.append(icon('pin'), document.createTextNode(h.city));
+  who.append(place);
+  head.append(avatar, who);
+  if (h.distanceKm !== undefined) head.append(el('span', 'dist', formatDistance(h.distanceKm)));
+  li.append(head);
+
+  const tags = el('ul', 'tags');
+  if (h.icoVerified) tags.append(el('li', 'tag ok', '✔ Ověřené IČO'));
+  if (h.visits) tags.append(el('li', 'tag ok', 'Přijede i k vám domů'));
+  for (const s of h.services) if (SERVICES[s]) tags.append(el('li', 'tag', SERVICES[s]));
+  li.append(tags);
+
+  if (h.note) li.append(el('p', 'note', h.note));
+
+  const actions = el('div', 'actions');
+  if (h.phone) actions.append(linkButton('btn-call', `tel:${h.phone}`, 'phone', `Zavolat ${formatPhone(h.phone)}`));
+  if (h.email) actions.append(linkButton('btn-outline', `mailto:${h.email}`, 'mail', h.email));
   if (h.web && /^https?:\/\//i.test(h.web)) {
-    const p = el('p');
-    const a = el('a', null, `🌐 ${h.web}`);
-    a.href = h.web;
+    const a = linkButton('btn-outline', h.web, 'web', h.web.replace(/^https?:\/\//i, '').replace(/\/$/, ''));
     a.rel = 'noopener nofollow';
     a.target = '_blank';
-    p.append(a);
-    li.append(p);
+    actions.append(a);
   }
+  li.append(actions);
+
   const report = el('button', 'linkish report', 'Nahlásit problém');
   report.type = 'button';
   report.addEventListener('click', (e) => {
@@ -71,21 +112,16 @@ function renderItem(h) {
   });
   li.append(report);
 
-  const focus = () => {
-    const m = markers.get(h.id);
-    if (!m) return;
-    map.setView(m.getLatLng(), 13);
-    m.openPopup();
-  };
-  li.addEventListener('click', (e) => { if (!e.target.closest('a')) focus(); });
-  li.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target === li) focus(); });
+  li.addEventListener('click', (e) => { if (!e.target.closest('a, button')) focusHelper(h.id); });
+  li.addEventListener('keydown', (e) => { if (e.key === 'Enter' && e.target === li) focusHelper(h.id); });
   return li;
 }
 
 function render() {
   const list = currentList();
   resultsEl.replaceChildren(...list.map(renderItem));
-  if (!list.length && all.length) resultsEl.append(el('li', null, 'Pro vybranou pomoc zatím nikoho nemáme. Zkuste zrušit výběr výše.'));
+  $('#count').textContent = all.length ? String(list.length) : '';
+  if (!list.length && all.length) resultsEl.append(el('li', 'empty', 'Pro vybranou pomoc zatím nikoho nemáme. Zkuste zrušit výběr výše.'));
   for (const [id, m] of markers) {
     const visible = list.some((h) => h.id === id);
     if (visible && !map.hasLayer(m)) m.addTo(map);
@@ -105,10 +141,17 @@ function popupContent(h) {
   return div;
 }
 
+function pinIcon(h) {
+  const div = el('div', 'pin');
+  div.append(el('b', null, initials(h.name)));
+  return L.divIcon({ html: div, className: '', iconSize: [40, 40], iconAnchor: [20, 40], popupAnchor: [0, -38] });
+}
+
 function setOrigin(lat, lon, label) {
   origin = { lat, lon };
   if (userMarker) userMarker.remove();
-  userMarker = L.circleMarker([lat, lon], { radius: 10, color: '#d93025', fillOpacity: 0.8 })
+  const me = L.divIcon({ html: el('div', 'me'), className: '', iconSize: [22, 22], iconAnchor: [11, 11] });
+  userMarker = L.marker([lat, lon], { icon: me, keyboard: false })
     .addTo(map)
     .bindPopup(el('span', null, label));
   map.setView([lat, lon], 11);
@@ -168,7 +211,12 @@ try {
   statusEl.textContent = 'Seznam se nepodařilo načíst. Zkuste prosím obnovit stránku.';
 }
 for (const h of all) {
-  markers.set(h.id, L.marker([h.lat, h.lon]).bindPopup(() => popupContent(h)));
+  const m = L.marker([h.lat, h.lon], { icon: pinIcon(h), title: h.name }).bindPopup(() => popupContent(h));
+  m.on('click', () => {
+    focusHelper(h.id);
+    resultsEl.querySelector(`[data-id="${CSS.escape(h.id)}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  });
+  markers.set(h.id, m);
 }
 render();
 if (markers.size) map.fitBounds(L.featureGroup([...markers.values()]).getBounds().pad(0.2));
