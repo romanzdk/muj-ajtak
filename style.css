@@ -44,7 +44,7 @@ button, input { font: inherit; }
 .link-button { display: inline-block; text-decoration: none; }
 
 .linkish {
-  background: none; border: 0; padding: 0;
+  background: none; border: 0; padding: 12px 0; min-height: 48px;
   color: var(--accent); text-decoration: underline; cursor: pointer;
 }
 

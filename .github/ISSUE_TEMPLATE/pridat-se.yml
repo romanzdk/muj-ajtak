@@ -8,6 +8,8 @@ body:
       value: |
         Díky, že chcete pomáhat! Vyplňte prosím údaje, které se zobrazí na webu.
         Přesnou adresu nevyplňujte, stačí město nebo jeho část.
+
+        **Pozor:** tato přihláška je na GitHubu hned veřejně vidět (i před schválením).
   - type: input
     attributes:
       label: Jméno nebo název firmy

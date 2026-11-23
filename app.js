@@ -5,7 +5,7 @@ const $ = (sel) => document.querySelector(sel);
 const statusEl = $('#status');
 const resultsEl = $('#results');
 
-const map = L.map('map').setView([49.8, 15.5], 7);
+const map = L.map('map', { dragging: !L.Browser.mobile, tap: false }).setView([49.8, 15.5], 7);
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 19,
   attribution: '&copy; přispěvatelé <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
@@ -54,7 +54,7 @@ function renderItem(h) {
     p.append(a);
     li.append(p);
   }
-  if (h.web && /^https?:\/\//.test(h.web)) {
+  if (h.web && /^https?:\/\//i.test(h.web)) {
     const p = el('p');
     const a = el('a', null, `🌐 ${h.web}`);
     a.href = h.web;
@@ -85,7 +85,7 @@ function renderItem(h) {
 function render() {
   const list = currentList();
   resultsEl.replaceChildren(...list.map(renderItem));
-  if (!list.length) resultsEl.append(el('li', null, 'Pro vybranou pomoc zatím nikoho nemáme. Zkuste zrušit výběr výše.'));
+  if (!list.length && all.length) resultsEl.append(el('li', null, 'Pro vybranou pomoc zatím nikoho nemáme. Zkuste zrušit výběr výše.'));
   for (const [id, m] of markers) {
     const visible = list.some((h) => h.id === id);
     if (visible && !map.hasLayer(m)) m.addTo(map);
@@ -110,13 +110,13 @@ function setOrigin(lat, lon, label) {
   if (userMarker) userMarker.remove();
   userMarker = L.circleMarker([lat, lon], { radius: 10, color: '#d93025', fillOpacity: 0.8 })
     .addTo(map)
-    .bindPopup(label);
+    .bindPopup(el('span', null, label));
   map.setView([lat, lon], 11);
   render();
   const nearest = currentList()[0];
   statusEl.textContent = nearest
     ? `Nejbližší ajťák je ${formatDistance(nearest.distanceKm)} od ${label === 'Vy jste zde' ? 'vás' : `místa „${label}“`}. Seznam je seřazený od nejbližšího.`
-    : 'Zatím tu nikoho nemáme.';
+    : 'Pro vybranou pomoc zatím nikoho nemáme. Zkuste zrušit výběr výše.';
 }
 
 $('#btn-locate').addEventListener('click', () => {
@@ -126,9 +126,11 @@ $('#btn-locate').addEventListener('click', () => {
   };
   if (!navigator.geolocation) return fail();
   statusEl.textContent = 'Zjišťuji vaši polohu…';
+  // Firefox calls neither callback when the prompt is dismissed with "Not now".
+  const guard = setTimeout(fail, 20000);
   navigator.geolocation.getCurrentPosition(
-    (pos) => setOrigin(pos.coords.latitude, pos.coords.longitude, 'Vy jste zde'),
-    fail,
+    (pos) => { clearTimeout(guard); setOrigin(pos.coords.latitude, pos.coords.longitude, 'Vy jste zde'); },
+    () => { clearTimeout(guard); fail(); },
     { timeout: 15000, maximumAge: 600000 },
   );
 });

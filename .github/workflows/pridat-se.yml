@@ -3,6 +3,9 @@ name: Přihláška → PR
 on:
   issues:
     types: [opened, edited]
+  push:
+    branches: [main]
+    paths: [data.json]
   workflow_dispatch:
     inputs:
       issue:
@@ -13,14 +16,32 @@ permissions:
   contents: write
   pull-requests: write
   issues: write
+  actions: write
 
 concurrency:
-  group: pridat-se-${{ github.event.issue.number || inputs.issue }}
+  group: pridat-se-${{ github.event.issue.number || inputs.issue || 'push' }}
   cancel-in-progress: true
 
 jobs:
+  # After a merge, rebuild every other open application from fresh main so their PRs don't conflict on data.json.
+  rebuild-open:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      actions: write
+      issues: read
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - run: |
+          for n in $(gh issue list -R "$GITHUB_REPOSITORY" --label prihlaska --state open --json number --jq '.[].number'); do
+            gh workflow run pridat-se.yml -R "$GITHUB_REPOSITORY" -f issue="$n"
+          done
+
   pr:
-    if: github.event_name == 'workflow_dispatch' || contains(github.event.issue.labels.*.name, 'prihlaska')
+    if: >-
+      github.event_name == 'workflow_dispatch' ||
+      (github.event_name == 'issues' && github.event.issue.state == 'open' && contains(github.event.issue.labels.*.name, 'prihlaska'))
     runs-on: ubuntu-latest
     env:
       GH_TOKEN: ${{ github.token }}
@@ -47,6 +68,7 @@ jobs:
           branch="pridat-se/$ISSUE"
           git checkout -B "$branch"
           git add data.json
+          if git diff --cached --quiet; then echo "Beze změny"; exit 0; fi
           git commit -m "Přidat ajťáka z #$ISSUE"
           git push --force origin "$branch"
           if gh pr view "$branch" --json state --jq .state 2>/dev/null | grep -q OPEN; then
