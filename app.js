@@ -121,11 +121,24 @@ function renderItem(h) {
   return li;
 }
 
+function emptyStart() {
+  const li = el('li', 'empty');
+  li.append(el('p', null, 'Služba je nová a první ajťáci se právě přidávají. Zkuste to prosím znovu za pár dní.'));
+  const p = el('p');
+  p.append(document.createTextNode('Jste ajťák? '));
+  const a = el('a', null, 'Přidejte se');
+  a.href = 'pridat-se.html';
+  p.append(a, document.createTextNode(' jako jeden z prvních.'));
+  li.append(p);
+  return li;
+}
+
 function render() {
   const list = currentList();
   resultsEl.replaceChildren(...list.map(renderItem));
   $('#count').textContent = all.length ? String(list.length) : '';
   if (!list.length && all.length) resultsEl.append(el('li', 'empty', 'Pro vybranou pomoc zatím nikoho nemáme. Zkuste zrušit výběr nahoře. Služba je nová a ajťáci přibývají.'));
+  if (!all.length) resultsEl.append(emptyStart());
   for (const [id, m] of markers) {
     const visible = list.some((h) => h.id === id);
     if (visible && !map.hasLayer(m)) m.addTo(map);
@@ -163,7 +176,9 @@ function setOrigin(lat, lon, label) {
   const nearest = currentList()[0];
   statusEl.textContent = nearest
     ? `Nejbližší ajťák je ${formatDistance(nearest.distanceKm)} od ${label === 'Vy jste zde' ? 'vás' : `místa „${label}“`}. Seznam je seřazený od nejbližšího.`
-    : 'Pro vybranou pomoc zatím nikoho nemáme. Zkuste zrušit výběr výše.';
+    : all.length
+      ? 'Pro vybranou pomoc zatím nikoho nemáme. Zkuste zrušit výběr výše.'
+      : 'Služba je nová a první ajťáci se právě přidávají. Zkuste to prosím znovu za pár dní.';
   // On phones the results sit below the search box; bring them into view so nobody misses them.
   if (matchMedia('(max-width: 959px)').matches) statusEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
