@@ -1,6 +1,6 @@
 import { processApplication } from '../prihlaska.js';
 
-const ALLOWED_ORIGINS = ['https://romanzdk.github.io'];
+const ALLOWED_ORIGINS = ['https://najdiajtaka.cz', 'https://www.najdiajtaka.cz', 'https://romanzdk.github.io'];
 const REPO = 'romanzdk/muj-ajtak-prihlasky';
 const FAIL = 'Odeslání se nepovedlo. Zkuste to prosím později, nebo nám napište e-mail (odkaz je dole na stránce).';
 
