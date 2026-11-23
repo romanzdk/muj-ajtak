@@ -160,6 +160,8 @@ function setOrigin(lat, lon, label) {
   statusEl.textContent = nearest
     ? `Nejbližší ajťák je ${formatDistance(nearest.distanceKm)} od ${label === 'Vy jste zde' ? 'vás' : `místa „${label}“`}. Seznam je seřazený od nejbližšího.`
     : 'Pro vybranou pomoc zatím nikoho nemáme. Zkuste zrušit výběr výše.';
+  // On phones the results sit below the search box; bring them into view so nobody misses them.
+  if (matchMedia('(max-width: 959px)').matches) statusEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 $('#btn-locate').addEventListener('click', () => {
