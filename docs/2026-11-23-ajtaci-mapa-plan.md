@@ -15,7 +15,7 @@
 - All UI text in Czech. Base font ≥ 20px, buttons ≥ 48px high, contrast WCAG AA, no popups/modals.
 - List above the map. Phone shown as `tel:` link.
 - Public data: city / city part + its coordinates only, never street address.
-- Contact e-mail `<kontaktni-email>` must never appear as plain text in any committed file: store it split (`["romanzdk","gmail.com"]`) in `app.js` and build the `mailto:` only on click. Used for: adding without GitHub, removal, and the per-record "Nahlásit problém" link (mailto with subject `Nahlášení: <name>`, because seniors have no GitHub).
+- Contact e-mail `<kontaktni-email>` must never appear as plain text in any committed file: store it split into parts in `mail.js` and build the `mailto:` only on click. Used for: adding without GitHub, removal, and the per-record "Nahlásit problém" link (mailto with subject `Nahlášení: <name>`, because seniors have no GitHub).
 - Nominatim: only on user click, `countrycodes=cz`, ≤ 1 request/s; Action sends a `User-Agent` naming the repo URL.
 - No npm dependencies. Tests: `node --test tests/`.
 - All user-provided strings rendered via `textContent` / escaped (never `innerHTML` with data).
