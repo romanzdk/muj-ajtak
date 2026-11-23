@@ -14,7 +14,7 @@ Teď hledáme první ajťáky z Mnichovic, Říčan a okolí. Nemusíte být pro
 - lidé vám volají přímo, cenu si domluvíte sami (nebo pomáháte zdarma),
 - každou přihlášku ručně kontrolujeme.
 
-Přihlásit se můžete na **romanzdk.github.io/muj-ajtak/pridat-se.html**.
+Přihlásit se můžete na **najdiajtaka.cz/pridat-se.html**.
 
 Roman Žydyk, Mnichovice
 
@@ -24,7 +24,7 @@ Roman Žydyk, Mnichovice
 
 Na webu **Najdi ajťáka** najdete lidi z okolí, kteří pomůžou s počítačem, mobilem, internetem nebo tiskárnou. Někteří přijedou až domů.
 
-1. Otevřete **romanzdk.github.io/muj-ajtak** (nebo poproste děti či vnoučata).
+1. Otevřete **najdiajtaka.cz** (nebo poproste děti či vnoučata).
 2. Klikněte na „Najít v mém okolí“, nebo napište své město.
 3. Vyberte si ajťáka, zavolejte mu a domluvte se.
 
@@ -40,7 +40,7 @@ Ahoj sousedi 👋 Spouštím web **Najdi ajťáka**: seznam lidí z okolí, kte�
 
 Hledám prvních pár ajťáků z Mnichovic, Říčan a okolí. Přidání trvá 3 minuty, je zdarma a bez provize, cenu si určujete sami. Hodí se i pro studenty.
 
-👉 romanzdk.github.io/muj-ajtak/pridat-se.html
+👉 najdiajtaka.cz/pridat-se.html
 
 Díky za sdílení! 🙏
 

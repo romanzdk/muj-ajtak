@@ -2,7 +2,7 @@
 
 Jednoduchý web, kde lidé (hlavně senioři) najdou ajťáka ve svém okolí: seznam seřazený podle vzdálenosti, mapa a hledání podle polohy nebo města / PSČ.
 
-Web: https://romanzdk.github.io/muj-ajtak/
+Web: https://najdiajtaka.cz/
 
 ## Jak to funguje
 

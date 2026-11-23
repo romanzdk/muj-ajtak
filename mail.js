@@ -1,5 +1,5 @@
 // Address is split so scrapers reading the HTML/JS source don't get it as plain text.
-const parts = ['romanzdk', 'gmail.com'];
+const parts = ['info', 'najdiajtaka.cz'];
 
 export function openMail(subject) {
   window.location.href = `mailto:${parts.join('@')}?subject=${encodeURIComponent(subject)}`;
