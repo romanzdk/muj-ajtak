@@ -87,5 +87,23 @@
     ],
     "visits": true,
     "note": "Pomoc s programováním závlahových systémů hunter"
+  },
+  {
+    "id": "p-mwur4nb6130si2l",
+    "name": "Filip Škvor",
+    "city": "Benešov",
+    "lat": 49.7829,
+    "lon": 14.6876,
+    "phone": "775225335",
+    "email": "info@pc-benesov.cz",
+    "web": "https://www.pc-benesov.cz",
+    "services": [
+      "pocitac",
+      "internet"
+    ],
+    "visits": true,
+    "note": "Mohu pomoci s:\n- počítačem\n-notebookem\n- pokrytím domácí WiFi sítě\n- automatickým zálohováním\n- zabezpečením stanic\n\nSamotný výjezd na místo k zákazníkovi 1000 Kč + hodinová sazba",
+    "ico": "87682192",
+    "icoName": "Filip Škvor"
   }
 ]
