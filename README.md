@@ -12,7 +12,7 @@ Web: https://najdiajtaka.cz/
   - Worker zkontroluje údaje (`prihlaska.js`), ochranu proti robotům (Turnstile), najde město na mapě a ověří IČO v ARES.
   - Pak založí **soukromé** issue v `romanzdk/muj-ajtak-prihlasky`.
   - O každé nové přihlášce pošle e-mail na romanzdk@gmail.com (Cloudflare Email Routing, odesílatel prihlasky@najdiajtaka.cz).
-- Schválení: v soukromém repu přidej issue štítek `schvaleno`. Workflow tam ajťáka přidá do `data.json` tady a web se do pár minut aktualizuje. Postup je v README soukromého repa.
+- Schválení je automatické: hned po založení issue workflow v soukromém repu zkontroluje přihlášku (`autoReview` v `prihlaska.js`: test, místo mimo ČR, web, riskantní poznámka, nesedící IČO, cizí kontakt) a buď ajťáka zapíše do `data.json` (oprava od téhož člověka přepíše jeho kartu), nebo dá štítek `podezrele`. Ruční schválení: štítek `schvaleno`.
 
 ## Ruční přidání nebo odebrání
 
