@@ -27,7 +27,8 @@ export function buildNotifyEmail(helper, issueUrl, now = new Date()) {
     '',
     `${helper.name}, ${helper.city}`,
     '',
-    'Zkontroluj a schval (štítek schvaleno):',
+    'Automat ji hned zkontroluje. Když projde, bude na webu do pár minut.',
+    'Když ne, dostane štítek podezrele a čeká na tebe:',
     issueUrl,
   ].join('\r\n');
   return [

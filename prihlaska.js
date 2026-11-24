@@ -156,3 +156,28 @@ export function extractHelper(issueBody) {
 export function upsertHelper(data, helper) {
   return [...data.filter((h) => h.id !== helper.id), helper];
 }
+
+const TEST_NAME = /\b(test\w*|zk[oO]u[sš]k\w*|pokus\w*|asdf|xxx)\b/i;
+const RISKY_NOTE = /hesl|\bpin\b|předem|predem|záloh|zaloh|anydesk|teamviewer|rustdesk|vzdálen|vzdalen|kryptom|bitcoin|volejte ihned/i;
+const IN_CZ = (h) => h.lat > 48.5 && h.lat < 51.1 && h.lon > 12 && h.lon < 18.9;
+
+// Automatic approval: returns { helper } to publish, or { reason } for manual review.
+export function autoReview(issueBody, data) {
+  let helper;
+  try {
+    helper = extractHelper(issueBody);
+  } catch (err) {
+    return { reason: err.message };
+  }
+  if (TEST_NAME.test(helper.name)) return { reason: 'jméno vypadá jako test' };
+  if (!IN_CZ(helper)) return { reason: 'místo na mapě není v ČR' };
+  if (helper.web) return { reason: 'vyplněný web – zkontroluj ho ručně' };
+  if (helper.note && RISKY_NOTE.test(helper.note)) return { reason: 'poznámka zmiňuje hesla, platbu předem nebo vzdálený přístup' };
+  const icoLine = (issueBody.match(/^- IČO: (.*)$/m) || [])[1] || 'nevyplněno';
+  if (icoLine !== 'nevyplněno' && !helper.ico) return { reason: `IČO nesedí ke jménu (${icoLine})` };
+  const sameContact = data.filter((h) => (helper.phone && h.phone === helper.phone) || (helper.email && h.email === helper.email));
+  const other = sameContact.find((h) => h.name !== helper.name);
+  if (other) return { reason: `stejný telefon nebo e-mail už má ${other.name}` };
+  if (sameContact.length) helper = { ...helper, id: sameContact[0].id };
+  return { helper, update: sameContact.length > 0 };
+}
