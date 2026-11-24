@@ -105,5 +105,26 @@
     "note": "Mohu pomoci s:\n- počítačem\n-notebookem\n- pokrytím domácí WiFi sítě\n- automatickým zálohováním\n- zabezpečením stanic\n\nSamotný výjezd na místo k zákazníkovi 1000 Kč + hodinová sazba",
     "ico": "87682192",
     "icoName": "Filip Škvor"
+  },
+  {
+    "id": "p-mwusk688q1gvuv",
+    "name": "Martin Krejčí",
+    "city": "Tehov u Říčan",
+    "lat": 49.9777,
+    "lon": 14.7033,
+    "phone": "+420777074673",
+    "email": "info@krejci-servis.cz",
+    "web": "https://krejci-servis.cz/",
+    "services": [
+      "pocitac",
+      "telefon",
+      "internet",
+      "tiskarna",
+      "ostatni"
+    ],
+    "visits": true,
+    "note": "Internet - vyhledávání, bezpečné nakupování online\nE-mail - čtení, psaní, přílohy\nZáklady Windows - spouštění programů, správa souborů\nChytrý telefon a tablet - hovory, zprávy, WhatsApp, fotky\nNastavení aplikací a bezpečné přihlašování\nChytrá televize - přepínání zdrojů, streamování",
+    "ico": "17090563",
+    "icoName": "Martin Krejčí"
   }
 ]
