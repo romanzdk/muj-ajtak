@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Ochrana osobních údajů – Najdi ajťáka</title>
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com; font-src 'self'; object-src 'none'; base-uri 'none'; connect-src https://cloudflareinsights.com">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://static.cloudflareinsights.com https://gc.zgo.at; font-src 'self'; object-src 'none'; base-uri 'none'; connect-src https://cloudflareinsights.com https://najdiajtaka.goatcounter.com; img-src 'self' https://najdiajtaka.goatcounter.com">
   <link rel="canonical" href="https://najdiajtaka.cz/ochrana-udaju.html">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -25,7 +25,7 @@
   <h2>Údaje návštěvníků</h2>
   <p><strong>Poloha:</strong> když kliknete na „Najít v mém okolí“, vaše přesná poloha zůstane jen ve vašem prohlížeči a slouží k seřazení seznamu. Mapa ale stahuje obrázky okolí z OpenStreetMap, takže OpenStreetMap Foundation vidí, kterou oblast mapy si prohlížíte.</p>
   <p><strong>Hledání podle města:</strong> napsaný text se odešle službě Nominatim (OpenStreetMap Foundation, Velká Británie).</p>
-  <p><strong>Při každém načtení stránky</strong> vidí vaši IP adresu: GitHub (hosting webu, USA), Cloudflare (knihovna mapy z cdnjs a formulář pro ajťáky, USA) a OpenStreetMap Foundation (mapa). Základem je oprávněný zájem na fungování webu (čl. 6 odst. 1 písm. f GDPR). Písmo máme uložené přímo na webu. Nepoužíváme cookies. Návštěvnost měříme přes Cloudflare Web Analytics (USA), který neukládá cookies ani IP adresy. Vidíme jen souhrnná čísla, například počet návštěv, typ zařízení a odkud lidé na web přišli.</p>
+  <p><strong>Při každém načtení stránky</strong> vidí vaši IP adresu: GitHub (hosting webu, USA), Cloudflare (knihovna mapy z cdnjs a formulář pro ajťáky, USA), OpenStreetMap Foundation (mapa) a GoatCounter (měření návštěvnosti). Základem je oprávněný zájem na fungování webu (čl. 6 odst. 1 písm. f GDPR). Písmo máme uložené přímo na webu. Nepoužíváme cookies. Návštěvnost měříme přes Cloudflare Web Analytics (USA) a GoatCounter (goatcounter.com). Ani jeden neukládá cookies ani IP adresy. GoatCounter si IP adresu drží jen v paměti nejvýš 8 hodin, aby nepočítal jednu návštěvu dvakrát. Vidíme jen souhrnná čísla, například počet návštěv, typ zařízení a odkud lidé na web přišli (třeba z našeho letáku).</p>
 
   <h2>Vaše práva</h2>
   <p>Máte právo na přístup ke svým údajům, jejich opravu, výmaz, omezení zpracování, přenositelnost a právo vznést námitku. Souhlas můžete kdykoli odvolat. Stížnost můžete podat u Úřadu pro ochranu osobních údajů (<a href="https://uoou.gov.cz">uoou.gov.cz</a>).</p>
@@ -36,6 +36,7 @@
   <p><a href="./">← Zpět na hledání</a></p>
   </main>
   <script type="module" src="mail.js"></script>
+  <script data-goatcounter="https://najdiajtaka.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
   <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js" data-cf-beacon='{"token": "04b22506d2b348bea5fd0b441c86af08"}'></script>
 </body>
 </html>
