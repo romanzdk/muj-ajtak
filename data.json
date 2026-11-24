@@ -126,5 +126,26 @@
     "note": "Internet - vyhledávání, bezpečné nakupování online\nE-mail - čtení, psaní, přílohy\nZáklady Windows - spouštění programů, správa souborů\nChytrý telefon a tablet - hovory, zprávy, WhatsApp, fotky\nNastavení aplikací a bezpečné přihlašování\nChytrá televize - přepínání zdrojů, streamování",
     "ico": "17090563",
     "icoName": "Martin Krejčí"
+  },
+  {
+    "id": "p-mwuwwtvcarc6gk",
+    "name": "Pavel Račák",
+    "city": "Zábřeh",
+    "lat": 49.8829,
+    "lon": 16.8725,
+    "phone": "+420774001741",
+    "email": "info@helptech.cz",
+    "web": "https://helptech.cz",
+    "services": [
+      "pocitac",
+      "telefon",
+      "internet",
+      "tiskarna",
+      "ostatni"
+    ],
+    "visits": true,
+    "note": "Váš osobní ajťák pro firmy i domácnosti. IT servis, správa sítí, počítačů, serverů, webů a zabezpečení bez zbytečných starostí.",
+    "ico": "74689231",
+    "icoName": "Pavel Račák"
   }
 ]
