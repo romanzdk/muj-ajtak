@@ -71,5 +71,21 @@
       "ostatni"
     ],
     "visits": true
+  },
+  {
+    "id": "p-mwugbo7s1ytl564",
+    "name": "Marek Novák",
+    "city": "Nymburk",
+    "lat": 50.1853,
+    "lon": 15.0415,
+    "phone": "723101471",
+    "email": "novakm61@gmail.com",
+    "services": [
+      "telefon",
+      "tiskarna",
+      "ostatni"
+    ],
+    "visits": true,
+    "note": "Pomoc s programováním závlahových systémů hunter"
   }
 ]
