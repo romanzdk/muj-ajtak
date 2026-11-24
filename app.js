@@ -158,10 +158,12 @@ function popupContent(h) {
   return div;
 }
 
-function pinIcon(h) {
+// Helpers from the same town share coordinates; fan their pins out in pixels so none hides another at any zoom.
+function pinIcon(h, i = 0, n = 1) {
   const div = el('div', 'pin');
   div.append(el('b', null, initials(h.name)));
-  return L.divIcon({ html: div, className: '', iconSize: [40, 40], iconAnchor: [20, 40], popupAnchor: [0, -38] });
+  const dx = Math.round((i - (n - 1) / 2) * 38);
+  return L.divIcon({ html: div, className: '', iconSize: [40, 40], iconAnchor: [20 - dx, 40], popupAnchor: [dx, -38] });
 }
 
 function setOrigin(lat, lon, label) {
@@ -231,8 +233,11 @@ try {
 } catch {
   statusEl.textContent = 'Seznam se nepodařilo načíst. Zkuste prosím obnovit stránku.';
 }
+const samePlace = {};
+for (const h of all) (samePlace[`${h.lat},${h.lon}`] ||= []).push(h);
 for (const h of all) {
-  const m = L.marker([h.lat, h.lon], { icon: pinIcon(h), title: h.name }).bindPopup(() => popupContent(h));
+  const group = samePlace[`${h.lat},${h.lon}`];
+  const m = L.marker([h.lat, h.lon], { icon: pinIcon(h, group.indexOf(h), group.length), title: h.name }).bindPopup(() => popupContent(h));
   m.on('click', () => {
     focusHelper(h.id);
     resultsEl.querySelector(`[data-id="${CSS.escape(h.id)}"]`)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
