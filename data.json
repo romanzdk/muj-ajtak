@@ -54,5 +54,22 @@
     ],
     "visits": true,
     "note": "Ajťák už od malička a i se tak živím :) \nPomohu s absolutně čímkoliv. \nPC, mobily, notebooky, tiskárny,Wi-Fi až po síťové rozvody a kamerové systémy."
+  },
+  {
+    "id": "p-mwuf3j851113oro",
+    "name": "Daniel Mareček",
+    "city": "Chrudim",
+    "lat": 49.9511,
+    "lon": 15.7948,
+    "phone": "+420602626101",
+    "email": "marecekd@seznam.cz",
+    "services": [
+      "pocitac",
+      "telefon",
+      "internet",
+      "tiskarna",
+      "ostatni"
+    ],
+    "visits": true
   }
 ]
