@@ -1,6 +1,6 @@
 import { SERVICES, geocodeQueryUrl } from './lib.js';
 
-const USER_AGENT = 'muj-ajtak (https://github.com/romanzdk/muj-ajtak)';
+const USER_AGENT = 'najdi-ajtaka (https://github.com/romanzdk/najdi-ajtaka)';
 
 // Drop control/invisible chars (newlines, bidi overrides) so a field can't fake extra lines.
 const oneLine = (v, max) => String(v ?? '').replace(/[\p{Cc}\p{Cf}]/gu, ' ').replace(/\s+/g, ' ').trim().slice(0, max);

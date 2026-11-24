@@ -10,7 +10,7 @@ Web: https://najdiajtaka.cz/
 - Mapa: Leaflet + OpenStreetMap. Hledání města: Nominatim.
 - Přihláška: formulář `pridat-se.html` → Cloudflare Worker (`worker/index.js`, adresa `https://muj-ajtak.romanzdk.workers.dev/prihlaska`).
   - Worker zkontroluje údaje (`prihlaska.js`), ochranu proti robotům (Turnstile), najde město na mapě a ověří IČO v ARES.
-  - Pak založí **soukromé** issue v `romanzdk/muj-ajtak-prihlasky`.
+  - Pak založí **soukromé** issue v `romanzdk/najdi-ajtaka-prihlasky`.
   - O každé nové přihlášce pošle e-mail na romanzdk@gmail.com (Cloudflare Email Routing, odesílatel prihlasky@najdiajtaka.cz).
 - Schválení je automatické: hned po založení issue workflow v soukromém repu zkontroluje přihlášku (`autoReview` v `prihlaska.js`: test, místo mimo ČR, web, riskantní poznámka, nesedící IČO, cizí kontakt) a buď ajťáka zapíše do `data.json` (oprava od téhož člověka přepíše jeho kartu), nebo dá štítek `podezrele`. Ruční schválení: štítek `schvaleno`.
 
@@ -29,7 +29,7 @@ Typy pomoci: `pocitac`, `telefon`, `internet`, `tiskarna`, `ostatni`. Nepovinné
 
 ```sh
 npx wrangler deploy                       # nasazení
-npx wrangler secret put GITHUB_TOKEN      # token: jen muj-ajtak-prihlasky, Issues: write
+npx wrangler secret put GITHUB_TOKEN      # token: jen najdi-ajtaka-prihlasky, Issues: write
 npx wrangler secret put TURNSTILE_SECRET  # z Cloudflare → Turnstile
 ```
 

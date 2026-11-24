@@ -29,7 +29,7 @@ test('valid application creates a private issue', async () => {
   const res = await worker.fetch(post(form), env);
   assert.equal(res.status, 200);
   const gh = calls.find((c) => c.url.includes('api.github.com') && c.init.method === 'POST');
-  assert.ok(gh.url.endsWith('/repos/romanzdk/muj-ajtak-prihlasky/issues'));
+  assert.ok(gh.url.endsWith('/repos/romanzdk/najdi-ajtaka-prihlasky/issues'));
   assert.equal(gh.init.headers.Authorization, 'Bearer t');
   assert.equal(res.headers.get('Access-Control-Allow-Origin'), ORIGIN);
 });
@@ -74,14 +74,14 @@ test('CORS preflight answers 204 without body', async () => {
 import { buildNotifyEmail } from '../worker/index.js';
 
 test('notify e-mail has UTF-8 subject, applicant and issue link', () => {
-  const raw = buildNotifyEmail({ name: 'Jan Novák', city: 'Mnichovice' }, 'https://github.com/romanzdk/muj-ajtak-prihlasky/issues/7', new Date('2026-11-23T10:00:00Z'));
+  const raw = buildNotifyEmail({ name: 'Jan Novák', city: 'Mnichovice' }, 'https://github.com/romanzdk/najdi-ajtaka-prihlasky/issues/7', new Date('2026-11-23T10:00:00Z'));
   assert.match(raw, /^From: .*<prihlasky@najdiajtaka\.cz>$/m);
   assert.match(raw, /^To: romanzdk@gmail\.com$/m);
   assert.match(raw, /^Subject: =\?UTF-8\?B\?/m);
   assert.match(raw, /Content-Type: text\/plain; charset=utf-8/);
   const body = Buffer.from(raw.split('\r\n\r\n')[1].replace(/\r\n/g, ''), 'base64').toString('utf8');
   assert.ok(body.includes('Jan Novák, Mnichovice'));
-  assert.ok(body.includes('https://github.com/romanzdk/muj-ajtak-prihlasky/issues/7'));
+  assert.ok(body.includes('https://github.com/romanzdk/najdi-ajtaka-prihlasky/issues/7'));
   const subject = raw.match(/^Subject: =\?UTF-8\?B\?(.+)\?=$/m)[1];
   assert.equal(Buffer.from(subject, 'base64').toString('utf8'), 'Nová přihláška: Jan Novák');
 });

@@ -1,7 +1,7 @@
 import { processApplication } from '../prihlaska.js';
 
 const ALLOWED_ORIGINS = ['https://najdiajtaka.cz', 'https://www.najdiajtaka.cz', 'https://romanzdk.github.io'];
-const REPO = 'romanzdk/muj-ajtak-prihlasky';
+const REPO = 'romanzdk/najdi-ajtaka-prihlasky';
 const FAIL = 'Odeslání se nepovedlo. Zkuste to prosím později, nebo nám napište e-mail (odkaz je dole na stránce).';
 
 const json = (data, status, origin) => new Response(status === 204 ? null : JSON.stringify(data), {
