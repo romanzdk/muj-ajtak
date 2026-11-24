@@ -165,5 +165,24 @@
     "visits": false,
     "ico": "48537306",
     "icoName": "Perseus, s.r.o."
+  },
+  {
+    "id": "p-mwv0z252bo8faz",
+    "name": "Tomáš Januška - Technik k Vám domů",
+    "city": "Hodonín",
+    "lat": 48.8564,
+    "lon": 17.1235,
+    "phone": "777762997",
+    "email": "technikkvamdomu@post.cz",
+    "web": "https://www.technikkvamdomu.cz",
+    "services": [
+      "pocitac",
+      "internet",
+      "tiskarna"
+    ],
+    "visits": true,
+    "note": "Ušetřím Vám starosti s technikou — srozumitelně a přímo u Vás doma  nebo v kanceláři.\n\n    ✓Počítače a notebooky\n    ✓Tiskárny a skenery\n    ✓Wi-Fi a domácí i firemní síť\n    ✓Přenos a zálohování dat\n    ✓Instalace a nastavení Windows\n    ✓Čištění a zrychlení PC\n    ✓Pomoc a zaškolení seniorů",
+    "ico": "75369672",
+    "icoName": "Tomáš Januška"
   }
 ]
