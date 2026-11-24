@@ -147,5 +147,23 @@
     "note": "Váš osobní ajťák pro firmy i domácnosti. IT servis, správa sítí, počítačů, serverů, webů a zabezpečení bez zbytečných starostí.",
     "ico": "74689231",
     "icoName": "Pavel Račák"
+  },
+  {
+    "id": "p-mwux8r0jdhtqhz",
+    "name": "Perseus s.r.o.",
+    "city": "Říčany",
+    "lat": 49.9919,
+    "lon": 14.6542,
+    "phone": "603545867",
+    "email": "fskvor@perseus.cz",
+    "web": "https://www.perseus.cz",
+    "services": [
+      "pocitac",
+      "internet",
+      "ostatni"
+    ],
+    "visits": false,
+    "ico": "48537306",
+    "icoName": "Perseus, s.r.o."
   }
 ]
