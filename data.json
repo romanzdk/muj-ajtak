@@ -184,5 +184,25 @@
     "note": "Ušetřím Vám starosti s technikou — srozumitelně a přímo u Vás doma  nebo v kanceláři.\n\n    ✓Počítače a notebooky\n    ✓Tiskárny a skenery\n    ✓Wi-Fi a domácí i firemní síť\n    ✓Přenos a zálohování dat\n    ✓Instalace a nastavení Windows\n    ✓Čištění a zrychlení PC\n    ✓Pomoc a zaškolení seniorů",
     "ico": "75369672",
     "icoName": "Tomáš Januška"
+  },
+  {
+    "id": "p-mww3mp361psgoiv",
+    "name": "Tomáš Rojík",
+    "city": "Plzeň",
+    "lat": 49.7477,
+    "lon": 13.3775,
+    "phone": "+420732219383",
+    "email": "tomrojik@gmail.com",
+    "web": "https://www.pocitaceplzen.cz/",
+    "services": [
+      "pocitac",
+      "telefon",
+      "internet",
+      "tiskarna"
+    ],
+    "visits": true,
+    "note": "Potřebujete opravit počítač nebo notebook? Vyjíždíme za zákazníky v Plzni, Přešticích, Dobřanech, Chlumčanech, Chotěšově a Stodu.",
+    "ico": "73691038",
+    "icoName": "Tomáš Rojík"
   }
 ]
