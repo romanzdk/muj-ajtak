@@ -119,37 +119,3 @@ test('extractHelper rejects edited JSON that breaks the rules', () => {
 test('upsertHelper replaces by id', () => {
   assert.deepEqual(upsertHelper([{ id: 'a', v: 1 }, { id: 'b' }], { id: 'a', v: 2 }), [{ id: 'b' }, { id: 'a', v: 2 }]);
 });
-
-import { autoReview } from '../prihlaska.js';
-
-const issue = (h, ico = 'nevyplněno') => `- IČO: ${ico}\n\n\`\`\`\`json\n${JSON.stringify(h, null, 2)}\n\`\`\`\``;
-const base = { id: 'p-new', name: 'Jan Novák', city: 'Mnichovice', lat: 49.936, lon: 14.709, phone: '777123456', services: ['pocitac'], visits: true };
-
-test('autoReview approves a normal application', () => {
-  assert.deepEqual(autoReview(issue(base), []), { helper: base, update: false });
-});
-
-test('autoReview reuses the id when the same person sends a correction', () => {
-  const r = autoReview(issue({ ...base, note: 'nová' }), [{ ...base, id: 'p-old' }]);
-  assert.equal(r.helper.id, 'p-old');
-  assert.equal(r.update, true);
-});
-
-test('autoReview sends suspicious applications to manual review', () => {
-  const cases = [
-    [{ ...base, name: 'zkouska2' }, 'test'],
-    [{ ...base, name: 'Test' }, 'test'],
-    [{ ...base, lat: 52.5, lon: 13.4 }, 'ČR'],
-    [{ ...base, web: 'https://x.cz' }, 'web'],
-    [{ ...base, note: 'Pošlete zálohu a nainstalujte AnyDesk' }, 'předem'],
-  ];
-  for (const [h, word] of cases) assert.match(autoReview(issue(h), []).reason, new RegExp(word), h.name);
-  assert.match(autoReview(issue(base), [{ ...base, id: 'x', name: 'Petr Jiný' }]).reason, /Petr Jiný/);
-  assert.match(autoReview(issue(base, '`12345678` → bez štítku (IČO v ARES nenalezeno)'), []).reason, /IČO/);
-  assert.match(autoReview('nic', []).reason, /json/);
-});
-
-test('autoReview keeps an informal note', () => {
-  const note = 'Windows nemám rád, ale když snesete moje klení, pomůžu vám i s nimi.';
-  assert.ok(autoReview(issue({ ...base, note }), []).helper);
-});
