@@ -107,27 +107,6 @@
     "icoName": "Filip Škvor"
   },
   {
-    "id": "p-mwusk688q1gvuv",
-    "name": "Martin Krejčí",
-    "city": "Tehov u Říčan",
-    "lat": 49.9777,
-    "lon": 14.7033,
-    "phone": "+420777074673",
-    "email": "info@krejci-servis.cz",
-    "web": "https://krejci-servis.cz/",
-    "services": [
-      "pocitac",
-      "telefon",
-      "internet",
-      "tiskarna",
-      "ostatni"
-    ],
-    "visits": true,
-    "note": "Internet - vyhledávání, bezpečné nakupování online\nE-mail - čtení, psaní, přílohy\nZáklady Windows - spouštění programů, správa souborů\nChytrý telefon a tablet - hovory, zprávy, WhatsApp, fotky\nNastavení aplikací a bezpečné přihlašování\nChytrá televize - přepínání zdrojů, streamování",
-    "ico": "17090563",
-    "icoName": "Martin Krejčí"
-  },
-  {
     "id": "p-mwuwwtvcarc6gk",
     "name": "Pavel Račák",
     "city": "Zábřeh",
@@ -204,5 +183,26 @@
     "note": "Potřebujete opravit počítač nebo notebook? Vyjíždíme za zákazníky v Plzni, Přešticích, Dobřanech, Chlumčanech, Chotěšově a Stodu.",
     "ico": "73691038",
     "icoName": "Tomáš Rojík"
+  },
+  {
+    "id": "p-mwusk688q1gvuv",
+    "name": "Martin Krejčí",
+    "city": "Tehov u Říčan",
+    "lat": 49.9777,
+    "lon": 14.7033,
+    "phone": "+420777074673",
+    "email": "info@krejci-servis.cz",
+    "web": "https://krejci-servis.cz/",
+    "services": [
+      "pocitac",
+      "telefon",
+      "internet",
+      "tiskarna",
+      "ostatni"
+    ],
+    "visits": true,
+    "note": "Internet - vyhledávání, bezpečné nakupování online\nE-mail - čtení, psaní, přílohy\nZáklady Windows - spouštění programů, správa souborů\nChytrý telefon a tablet - hovory, zprávy, WhatsApp, fotky\nNastavení aplikací a bezpečné přihlašování\nChytrá televize - přepínání zdrojů, streamování",
+    "ico": "17090563",
+    "icoName": "Martin Krejčí"
   }
 ]
