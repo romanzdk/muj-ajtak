@@ -88,7 +88,7 @@ function renderItem(h) {
   const tags = el('ul', 'tags');
   if (h.ico && h.icoName) {
     const t = el('li', 'tag ok', `IČO ${h.ico} v registru ARES`);
-    t.title = `${h.icoName} – IČO existuje v obchodním registru. Neznamená to doporučení ani ověření kvality.`;
+    t.title = `${h.icoName} – IČO je v registru ARES. Neznamená to doporučení ani ověření kvality.`;
     tags.append(t);
   }
   if (h.visits) tags.append(el('li', 'tag ok', 'Přijede i k vám domů'));
