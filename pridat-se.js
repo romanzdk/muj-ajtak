@@ -1,4 +1,5 @@
 import './mail.js';
+import { fromForm, validate } from './prihlaska.js';
 
 const ENDPOINT = 'https://muj-ajtak.romanzdk.workers.dev/prihlaska';
 const form = document.querySelector('#join');
@@ -56,6 +57,11 @@ form.addEventListener('submit', async (e) => {
     consentProcessing: fd.has('consentProcessing'),
     turnstileToken: fd.get('cf-turnstile-response'),
   };
+  const localErrors = validate(fromForm(payload));
+  if (localErrors.length) {
+    showErrors(localErrors);
+    return;
+  }
   const btn = form.querySelector('button[type="submit"]');
   const label = btn.textContent;
   sending = true;

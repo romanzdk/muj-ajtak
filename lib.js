@@ -3,7 +3,7 @@ export const SERVICES = {
   telefon: 'Telefon a tablet',
   internet: 'Internet a Wi-Fi',
   tiskarna: 'Tiskárna',
-  ostatni: 'Ostatní',
+  ostatni: 'Něco jiného',
 };
 
 const rad = (deg) => (deg * Math.PI) / 180;
