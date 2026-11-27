@@ -32,7 +32,7 @@ Teď hledáme první ajťáky z Mnichovic, Říčan a okolí. Nemusíte být pro
 
 - přidání trvá 3 minuty, je zdarma a bez provize,
 - lidé vám volají přímo, cenu si domluvíte sami (nebo pomáháte zdarma),
-- každou přihlášku ručně kontrolujeme.
+- každou přihlášku kontrolujeme.
 
 Přihlásit se můžete na **najdiajtaka.cz/pridat-se.html**.
 
